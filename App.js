@@ -1,20 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import React from "react";
+import { ApplicationProvider } from "./models/root";
+import AppNavigator from "./navigation";
+import BottomDrawer from "./components/BottomDrawer";
+import { NativeBaseProvider } from "native-base";
+import borno from "./assets/theme";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NativeBaseProvider theme={borno}>
+      <ApplicationProvider>
+        <NavigationContainer>
+          <AppNavigator />
+          <BottomDrawer />
+        </NavigationContainer>
+      </ApplicationProvider>
+    </NativeBaseProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
