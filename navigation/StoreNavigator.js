@@ -1,13 +1,13 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ProductListScreen from "../screens/store/ProductListScreen";
-import CategoryScreen from "../screens/store/CategoryScreen";
-import { Ionicons } from "@expo/vector-icons";
-import CartScreen from "../screens/store/CartScreen";
-import { useMst } from "../models/root";
-import routes from "./routes";
 import { HStack } from "native-base";
-import ShoppingCartIcon from "../assets/icons/ShoppingCartIcons";
 import CogOutlineIcon from "../assets/icons/CogOutlineIcon";
+import ShoppingCartIcon from "../assets/icons/ShoppingCartIcons";
+import { useMst } from "../models/root";
+import CartScreen from "../screens/store/CartScreen";
+import CategoryScreen from "../screens/store/CategoryScreen";
+import ProductDetailScreen from "../screens/store/ProductDetailScreen";
+import ProductListScreen from "../screens/store/ProductListScreen";
+import routes from "./routes";
 
 const StoreStack = createNativeStackNavigator();
 
@@ -34,6 +34,10 @@ const StoreNavigator = () => {
       <StoreStack.Screen
         name={routes.PRODUCT_LIST}
         component={ProductListScreen}
+      />
+      <StoreStack.Screen
+        name={routes.PRODUCT_DETAIL}
+        component={ProductDetailScreen}
       />
       <StoreStack.Screen name={routes.CART} component={CartScreen} />
     </StoreStack.Navigator>

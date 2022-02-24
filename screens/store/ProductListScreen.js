@@ -1,9 +1,18 @@
-import { AspectRatio, Box, HStack, Image, Input, VStack } from "native-base";
-import SearchIcon from "../../assets/icons/SearchIcon";
-import FilterIcon from "../../assets/icons/FilterIcon";
-import SettingAltIcon from "../../assets/icons/SettingsAltIcon";
+import {
+  AspectRatio,
+  Box,
+  HStack,
+  Image,
+  Input,
+  Pressable,
+  VStack,
+} from "native-base";
 import { FlatList } from "react-native";
+import FilterIcon from "../../assets/icons/FilterIcon";
+import SearchIcon from "../../assets/icons/SearchIcon";
+import SettingAltIcon from "../../assets/icons/SettingsAltIcon";
 import ProductListDetail from "../../components/ProductListDetail";
+import routes from "../../navigation/routes";
 
 const ProductListScreen = ({ route, navigation }) => {
   const PRODUCTS = [
@@ -89,12 +98,18 @@ const ProductListScreen = ({ route, navigation }) => {
   ];
 
   const renderProduct = ({ item }) => (
-    <ProductListDetail
-      thumbnailUrl={item.image}
-      title={item.title}
-      price={item.price}
-      reviews={item.rating.rate}
-    />
+    <Pressable
+      onPress={() =>
+        navigation.navigate(routes.PRODUCT_DETAIL, { id: item.id })
+      }
+    >
+      <ProductListDetail
+        thumbnailUrl={item.image}
+        title={item.title}
+        price={item.price}
+        reviews={item.rating.rate}
+      />
+    </Pressable>
   );
 
   const { id } = route.params;

@@ -1,7 +1,7 @@
 import { AspectRatio, Box, HStack, Image, Text, VStack } from "native-base";
 import { Dimensions } from "react-native";
 import HeartOutlineIcon from "../assets/icons/HeartOutlineIcon";
-import StarOutlineIcon from "../assets/icons/StarIcon";
+import StarOutlineIcon from "../assets/icons/StarOutlineIcon";
 
 const ProductListDetail = ({ thumbnailUrl, title, price, reviews }) => {
   const screen = Dimensions.get("screen");
