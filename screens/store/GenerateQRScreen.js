@@ -7,25 +7,30 @@ import {
   Box,
   Button,
   Checkbox,
-  Flex,
-  FormControl,
   HStack,
   Icon,
   IconButton,
   Image,
   Input,
   Modal,
+  Pressable,
   Text,
   VStack,
 } from "native-base";
 import { useState } from "react";
+import QRCode from "react-native-qrcode-svg";
 import ShoppingCartIcon from "../../assets/icons/ShoppingCartIcons";
 import Screen from "../../components/Screen";
 
 const GenerateQRScreen = () => {
   const [customerName, setCustomerName] = useState("Your Name");
-  const [tagIcon, setTagIcon] = useState("deer");
+  const [tagIcon, setTagIcon] = useState("alien");
   const [showModal, setShowModal] = useState(false);
+  const [showNameModal, setShowNameModal] = useState(false);
+  const baseUrl = "http://promisetag.com";
+  const name = customerName.toLowerCase().split(" ").join("-");
+  let url = `${baseUrl}/${tagIcon}/${name}`;
+
   return (
     <>
       <Screen style={{ backgroundColor: "#b3d1d6" }}>
@@ -51,17 +56,29 @@ const GenerateQRScreen = () => {
                     ml="74px"
                     mt="20"
                   >
-                    <Image
-                      source={require("../../assets/images/qr/deer.png")}
-                      alt="deer"
-                      size="10"
-                      resizeMode="contain"
-                    />
-                    <Image
-                      source={require("../../assets/images/qr/qr.png")}
-                      alt="qr"
-                      size="10"
-                      resizeMode="contain"
+                    {tagIcon === "deer" ? (
+                      <Image
+                        source={require("../../assets/images/qr/deer.png")}
+                        alt="deer"
+                        key="deer"
+                        size="10"
+                        resizeMode="contain"
+                      />
+                    ) : (
+                      <Image
+                        source={require("../../assets/images/qr/alien.png")}
+                        alt="alien"
+                        key="alien"
+                        size="10"
+                        resizeMode="contain"
+                      />
+                    )}
+                    <QRCode
+                      value={url}
+                      color="#27272a"
+                      backgroundColor="transparent"
+                      size="450"
+                      ecl="L"
                     />
                   </VStack>
                 </VStack>
@@ -94,34 +111,31 @@ const GenerateQRScreen = () => {
           </Box>
           <Box bg="white" h="60%" borderTopRadius="80px" pt="4" px="4">
             <VStack space="4">
-              <Flex h="24" justifyContent="center" alignItems="center">
-                {/**             <Text textAlign="center">Generated QR Code will appear here</Text> */}
-                <Flex
-                  justifyContent="center"
-                  alignItems="center"
-                  position="relative"
-                >
-                  <Image
-                    source={require("../../assets/images/qr/qr-bg.png")}
-                    alt="qr"
-                    size="24"
-                    resizeMode="contain"
+              <Box h="24" as="flex" alignItems="center" position="relative">
+                <Image
+                  source={require("../../assets/images/qr/qr-bg.png")}
+                  alt="qr"
+                  size="24"
+                  resizeMode="contain"
+                />
+                <Box position="absolute" left="50%" top="0" ml="-8" mt="4">
+                  <QRCode
+                    value={url}
+                    color="#27272a"
+                    backgroundColor="transparent"
+                    size="650"
+                    ecl="L"
                   />
-                  <Image
-                    position="absolute"
-                    source={require("../../assets/images/qr/qr.png")}
-                    alt="qr"
-                    size="16"
-                    resizeMode="contain"
-                  />
-                </Flex>
-              </Flex>
+                </Box>
+              </Box>
               <HStack space="8" px="8" py="2" bg="#e7e2ef" borderRadius="md">
                 <VStack w="12" space="2">
                   <IconButton
                     bg="#3c37cc"
                     shadow="9"
-                    onPress={() => setShowModal(true)}
+                    onPress={() => {
+                      setShowModal(true);
+                    }}
                     icon={
                       <Icon
                         as={MaterialCommunityIcons}
@@ -157,7 +171,9 @@ const GenerateQRScreen = () => {
                 <VStack w="12" space="2">
                   <IconButton
                     bg="#fac304"
-                    colorScheme="secondary"
+                    onPress={() => {
+                      setShowNameModal(true);
+                    }}
                     shadow="9"
                     icon={
                       <Icon
@@ -218,16 +234,48 @@ const GenerateQRScreen = () => {
       <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
         <Modal.Content maxWidth="400px">
           <Modal.CloseButton />
-          <Modal.Header>Contact Us</Modal.Header>
+          <Modal.Header>Choose an Icon</Modal.Header>
           <Modal.Body>
-            <FormControl>
-              <FormControl.Label>Name</FormControl.Label>
-              <Input />
-            </FormControl>
-            <FormControl mt="3">
-              <FormControl.Label>Email</FormControl.Label>
-              <Input />
-            </FormControl>
+            <HStack>
+              <Pressable
+                onPress={() => {
+                  setShowModal(false);
+                  setTagIcon("deer");
+                }}
+              >
+                <Image
+                  source={require("../../assets/images/qr/deer.png")}
+                  alt="deer-icon"
+                  size="sm"
+                  resizeMode="contain"
+                />
+              </Pressable>
+              <Pressable
+                onPress={() => {
+                  setShowModal(false);
+                  setTagIcon("alien");
+                }}
+              >
+                <Image
+                  source={require("../../assets/images/qr/alien.png")}
+                  alt="alien-icon"
+                  size="sm"
+                  resizeMode="contain"
+                />
+              </Pressable>
+            </HStack>
+          </Modal.Body>
+        </Modal.Content>
+      </Modal>
+      <Modal isOpen={showNameModal} onClose={() => setShowNameModal(false)}>
+        <Modal.Content maxWidth="400px">
+          <Modal.CloseButton />
+          <Modal.Header>Update Your Name</Modal.Header>
+          <Modal.Body>
+            <Input
+              value={customerName}
+              onChangeText={(text) => setCustomerName(text)}
+            />
           </Modal.Body>
           <Modal.Footer>
             <Button.Group space={2}>
@@ -235,14 +283,14 @@ const GenerateQRScreen = () => {
                 variant="ghost"
                 colorScheme="blueGray"
                 onPress={() => {
-                  setShowModal(false);
+                  setShowNameModal(false);
                 }}
               >
                 Cancel
               </Button>
               <Button
                 onPress={() => {
-                  setShowModal(false);
+                  setShowNameModal(false);
                 }}
               >
                 Save
