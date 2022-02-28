@@ -5,6 +5,7 @@ import ShoppingCartIcon from "../assets/icons/ShoppingCartIcons";
 import { useMst } from "../models/root";
 import CartScreen from "../screens/store/CartScreen";
 import CategoryScreen from "../screens/store/CategoryScreen";
+import GenerateQRScreen from "../screens/store/GenerateQRScreen";
 import ProductDetailScreen from "../screens/store/ProductDetailScreen";
 import ProductListScreen from "../screens/store/ProductListScreen";
 import routes from "./routes";
@@ -16,6 +17,7 @@ const StoreNavigator = () => {
 
   return (
     <StoreStack.Navigator
+      initialRouteName={routes.GENERATE_QR}
       screenOptions={({ navigation }) => ({
         animation: "slide_from_right",
         headerTitle: `Hi ${auth.firstName}`,
@@ -38,6 +40,10 @@ const StoreNavigator = () => {
       <StoreStack.Screen
         name={routes.PRODUCT_DETAIL}
         component={ProductDetailScreen}
+      />
+      <StoreStack.Screen
+        name={routes.GENERATE_QR}
+        component={GenerateQRScreen}
       />
       <StoreStack.Screen name={routes.CART} component={CartScreen} />
     </StoreStack.Navigator>

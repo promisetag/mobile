@@ -3,4 +3,5 @@ export default Object.freeze({
   PRODUCT_LIST: "ProductList",
   CART: "Cart",
   PRODUCT_DETAIL: "ProductDetail",
+  GENERATE_QR: "GenerateQR",
 });
