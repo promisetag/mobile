@@ -24,7 +24,7 @@ import Screen from "../../components/Screen";
 
 const GenerateQRScreen = () => {
   const [customerName, setCustomerName] = useState("Your Name");
-  const [tagIcon, setTagIcon] = useState("alien");
+  const [tagIcon, setTagIcon] = useState("deer");
   const [showModal, setShowModal] = useState(false);
   const [showNameModal, setShowNameModal] = useState(false);
   const baseUrl = "http://promisetag.com";
@@ -35,7 +35,7 @@ const GenerateQRScreen = () => {
     <>
       <Screen style={{ backgroundColor: "#b3d1d6" }}>
         <VStack>
-          <Box h="40%">
+          <Box h="45%">
             <HStack>
               <Box w="1/2">
                 <VStack position="relative">
@@ -45,7 +45,7 @@ const GenerateQRScreen = () => {
                   <Image
                     source={require("../../assets/images/qr/tagpng.png")}
                     alt="tag"
-                    size="48"
+                    size="64"
                     resizeMode="contain"
                   />
                   <VStack
@@ -53,15 +53,15 @@ const GenerateQRScreen = () => {
                     position="absolute"
                     top="0"
                     left="0"
-                    ml="74px"
-                    mt="20"
+                    ml="70px"
+                    mt="24"
                   >
                     {tagIcon === "deer" ? (
                       <Image
                         source={require("../../assets/images/qr/deer.png")}
                         alt="deer"
                         key="deer"
-                        size="10"
+                        size="16"
                         resizeMode="contain"
                       />
                     ) : (
@@ -69,7 +69,7 @@ const GenerateQRScreen = () => {
                         source={require("../../assets/images/qr/alien.png")}
                         alt="alien"
                         key="alien"
-                        size="10"
+                        size="16"
                         resizeMode="contain"
                       />
                     )}
@@ -77,8 +77,8 @@ const GenerateQRScreen = () => {
                       value={url}
                       color="#27272a"
                       backgroundColor="transparent"
-                      size="450"
-                      ecl="L"
+                      size="650"
+                      ecl="M"
                     />
                   </VStack>
                 </VStack>
@@ -91,7 +91,7 @@ const GenerateQRScreen = () => {
                   <Image
                     source={require("../../assets/images/qr/tagpng.png")}
                     alt="tag"
-                    size="48"
+                    size="64"
                     resizeMode="contain"
                   />
                   <Box
@@ -103,13 +103,13 @@ const GenerateQRScreen = () => {
                     w="16"
                     borderColor="black"
                   >
-                    <Text fontSize="sm">{customerName}</Text>
+                    <Text fontSize="md">{customerName}</Text>
                   </Box>
                 </VStack>
               </Box>
             </HStack>
           </Box>
-          <Box bg="white" h="60%" borderTopRadius="80px" pt="4" px="4">
+          <Box bg="white" h="55%" borderTopRadius="80px" pt="4" px="4">
             <VStack space="4">
               <Box h="24" as="flex" alignItems="center" position="relative">
                 <Image
