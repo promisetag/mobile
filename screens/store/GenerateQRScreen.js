@@ -11,25 +11,41 @@ import {
   Icon,
   IconButton,
   Image,
-  Input,
-  Modal,
-  Pressable,
   Text,
   VStack,
 } from "native-base";
 import { useState } from "react";
 import QRCode from "react-native-qrcode-svg";
 import ShoppingCartIcon from "../../assets/icons/ShoppingCartIcons";
+import ChooseIcon from "../../components/ChooseIcon";
 import Screen from "../../components/Screen";
+import UpdateName from "../../components/UpdateName";
+import UploadMemories from "../../components/UploadMemories";
 
 const GenerateQRScreen = () => {
   const [customerName, setCustomerName] = useState("Your Name");
   const [tagIcon, setTagIcon] = useState("deer");
-  const [showModal, setShowModal] = useState(false);
-  const [showNameModal, setShowNameModal] = useState(false);
+  const [showChooseIconDialog, setShowChooseIconDialog] = useState(false);
+  const [showUpdateNameDialog, setShowUpdateNameDialog] = useState(false);
+  const [showUploadMemoriesDialog, setShowUploadMemoriesDialog] =
+    useState(false);
+
   const baseUrl = "http://promisetag.com";
   const name = customerName.toLowerCase().split(" ").join("-");
   let url = `${baseUrl}/${tagIcon}/${name}`;
+
+  const iconList = [
+    {
+      name: "deer",
+      alt: "deer-icon",
+      source: require("../../assets/images/qr/deer.png"),
+    },
+    {
+      name: "alien",
+      alt: "alien-icon",
+      source: require("../../assets/images/qr/alien.png"),
+    },
+  ];
 
   return (
     <>
@@ -134,7 +150,7 @@ const GenerateQRScreen = () => {
                     bg="#3c37cc"
                     shadow="9"
                     onPress={() => {
-                      setShowModal(true);
+                      setShowChooseIconDialog(true);
                     }}
                     icon={
                       <Icon
@@ -153,6 +169,7 @@ const GenerateQRScreen = () => {
                 <VStack w="12" space="2">
                   <IconButton
                     bg="#28b7c8"
+                    onPress={() => setShowUploadMemoriesDialog(true)}
                     shadow="9"
                     icon={
                       <Icon
@@ -172,7 +189,7 @@ const GenerateQRScreen = () => {
                   <IconButton
                     bg="#fac304"
                     onPress={() => {
-                      setShowNameModal(true);
+                      setShowUpdateNameDialog(true);
                     }}
                     shadow="9"
                     icon={
@@ -231,74 +248,22 @@ const GenerateQRScreen = () => {
           </Box>
         </VStack>
       </Screen>
-      <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
-        <Modal.Content maxWidth="400px">
-          <Modal.CloseButton />
-          <Modal.Header>Choose an Icon</Modal.Header>
-          <Modal.Body>
-            <HStack>
-              <Pressable
-                onPress={() => {
-                  setShowModal(false);
-                  setTagIcon("deer");
-                }}
-              >
-                <Image
-                  source={require("../../assets/images/qr/deer.png")}
-                  alt="deer-icon"
-                  size="sm"
-                  resizeMode="contain"
-                />
-              </Pressable>
-              <Pressable
-                onPress={() => {
-                  setShowModal(false);
-                  setTagIcon("alien");
-                }}
-              >
-                <Image
-                  source={require("../../assets/images/qr/alien.png")}
-                  alt="alien-icon"
-                  size="sm"
-                  resizeMode="contain"
-                />
-              </Pressable>
-            </HStack>
-          </Modal.Body>
-        </Modal.Content>
-      </Modal>
-      <Modal isOpen={showNameModal} onClose={() => setShowNameModal(false)}>
-        <Modal.Content maxWidth="400px">
-          <Modal.CloseButton />
-          <Modal.Header>Update Your Name</Modal.Header>
-          <Modal.Body>
-            <Input
-              value={customerName}
-              onChangeText={(text) => setCustomerName(text)}
-            />
-          </Modal.Body>
-          <Modal.Footer>
-            <Button.Group space={2}>
-              <Button
-                variant="ghost"
-                colorScheme="blueGray"
-                onPress={() => {
-                  setShowNameModal(false);
-                }}
-              >
-                Cancel
-              </Button>
-              <Button
-                onPress={() => {
-                  setShowNameModal(false);
-                }}
-              >
-                Save
-              </Button>
-            </Button.Group>
-          </Modal.Footer>
-        </Modal.Content>
-      </Modal>
+      <ChooseIcon
+        isOpen={showChooseIconDialog}
+        setIsOpen={setShowChooseIconDialog}
+        setTagIcon={setTagIcon}
+        iconList={iconList}
+      />
+      <UploadMemories
+        isOpen={showUploadMemoriesDialog}
+        setIsOpen={setShowUploadMemoriesDialog}
+      />
+      <UpdateName
+        customerName={customerName}
+        setCustomerName={setCustomerName}
+        isOpen={showUpdateNameDialog}
+        setIsOpen={setShowUpdateNameDialog}
+      />
     </>
   );
 };
