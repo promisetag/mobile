@@ -17,6 +17,7 @@ import {
 import { useState } from "react";
 import QRCode from "react-native-qrcode-svg";
 import ShoppingCartIcon from "../../assets/icons/ShoppingCartIcons";
+import ChooseFont from "../../components/ChooseFont";
 import ChooseIcon from "../../components/ChooseIcon";
 import Screen from "../../components/Screen";
 import UpdateName from "../../components/UpdateName";
@@ -29,6 +30,10 @@ const GenerateQRScreen = () => {
   const [showUpdateNameDialog, setShowUpdateNameDialog] = useState(false);
   const [showUploadMemoriesDialog, setShowUploadMemoriesDialog] =
     useState(false);
+  const [nameFont, setNameFont] = useState("Roboto_400Regular");
+  const [nameAlignmentVertical, setNameAlignmentVertical] = useState("bottom");
+  const [nameAlignment, setNameAlignment] = useState("left");
+  const [showChooseFontDialog, setShowChooseFontDialog] = useState(false);
 
   const baseUrl = "http://promisetag.com";
   const name = customerName.toLowerCase().split(" ").join("-");
@@ -209,6 +214,7 @@ const GenerateQRScreen = () => {
                 <VStack w="12" space="2">
                   <IconButton
                     bg="#ff36b2"
+                    onPress={() => setShowChooseFontDialog(true)}
                     shadow="9"
                     icon={
                       <Icon
@@ -263,6 +269,16 @@ const GenerateQRScreen = () => {
         setCustomerName={setCustomerName}
         isOpen={showUpdateNameDialog}
         setIsOpen={setShowUpdateNameDialog}
+      />
+      <ChooseFont
+        font={nameFont}
+        setFont={setNameFont}
+        alignment={nameAlignment}
+        setAlignment={setNameAlignment}
+        verticalAlignment={nameAlignmentVertical}
+        setVerticalAlignment={setNameAlignmentVertical}
+        isOpen={showChooseFontDialog}
+        setIsOpen={setShowChooseFontDialog}
       />
     </>
   );
