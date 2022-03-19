@@ -69,8 +69,9 @@ import ChooseIcon from "../../components/ChooseIcon";
 import Screen from "../../components/Screen";
 import UpdateName from "../../components/UpdateName";
 import UploadMemories from "../../components/UploadMemories";
+import routes from "../../navigation/routes";
 
-const GenerateQRScreen = () => {
+const GenerateQRScreen = ({ navigation }) => {
   const [customerName, setCustomerName] = useState("Your Name");
   const [tagIcon, setTagIcon] = useState("deer");
   const [showChooseIconDialog, setShowChooseIconDialog] = useState(false);
@@ -347,6 +348,7 @@ const GenerateQRScreen = () => {
                     Rs. 1750
                   </Text>
                   <Button
+                    onPress={() => navigation.navigate(routes.CART)}
                     leftIcon={<ShoppingCartIcon w="3" h="3" />}
                     bg="white"
                   >

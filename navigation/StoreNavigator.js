@@ -45,7 +45,13 @@ const StoreNavigator = () => {
         name={routes.GENERATE_QR}
         component={GenerateQRScreen}
       />
-      <StoreStack.Screen name={routes.CART} component={CartScreen} />
+      <StoreStack.Screen
+        name={routes.CART}
+        component={CartScreen}
+        options={() => ({
+          headerTitle: "Your Cart",
+        })}
+      />
     </StoreStack.Navigator>
   );
 };
