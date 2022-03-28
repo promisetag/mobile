@@ -43,7 +43,7 @@ import {
   Roboto_900Black,
   Roboto_900Black_Italic,
 } from "@expo-google-fonts/roboto";
-import { Feather, MaterialIcons } from "@expo/vector-icons";
+import { Feather, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
 import {
@@ -74,7 +74,7 @@ const ChooseFont = ({
   const [weight, setWeight] = useState("_400Regular");
   const [style, setStyle] = useState("");
 
-  setFont(`${family}${weight}${style}`);
+  // setFont(`${family}${weight}${style}`);
 
   let fontsLoaded = useFonts({
     Inter_100Thin,
@@ -256,6 +256,14 @@ const ChooseFont = ({
                   <Select
                     selectedValue={family}
                     onValueChange={(itemValue) => setFamily(itemValue)}
+                    dropdownIcon={
+                      <Icon
+                        as={Ionicons}
+                        name="chevron-down-sharp"
+                        size="4"
+                        key="font-family"
+                      />
+                    }
                   >
                     {FONT_LIST.map((font) => (
                       <Select.Item
@@ -274,6 +282,14 @@ const ChooseFont = ({
                   <Select
                     selectedValue={size}
                     onValueChange={(itemValue) => setSize(itemValue)}
+                    dropdownIcon={
+                      <Icon
+                        as={Ionicons}
+                        name="chevron-down-sharp"
+                        size="4"
+                        key="font-size"
+                      />
+                    }
                   >
                     {FONT_SIZES.map((fsize) => (
                       <Select.Item
@@ -294,6 +310,14 @@ const ChooseFont = ({
                   <Select
                     selectedValue={weight}
                     onValueChange={(itemValue) => setWeight(itemValue)}
+                    dropdownIcon={
+                      <Icon
+                        as={Ionicons}
+                        name="chevron-down-sharp"
+                        size="4"
+                        key="font-weight"
+                      />
+                    }
                   >
                     {FONT_LIST.find(
                       (font) => font.family === family
@@ -313,6 +337,14 @@ const ChooseFont = ({
                   <Select
                     selectedValue={style}
                     onValueChange={(itemValue) => setStyle(itemValue)}
+                    dropdownIcon={
+                      <Icon
+                        as={Ionicons}
+                        name="chevron-down-sharp"
+                        size="4"
+                        key="font-style"
+                      />
+                    }
                   >
                     {FONT_LIST.find(
                       (font) => font.family === family
