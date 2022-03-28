@@ -17,7 +17,6 @@ const StoreNavigator = () => {
 
   return (
     <StoreStack.Navigator
-      initialRouteName={routes.GENERATE_QR}
       screenOptions={({ navigation }) => ({
         animation: "slide_from_right",
         headerTitle: `Hi ${auth.firstName}`,
