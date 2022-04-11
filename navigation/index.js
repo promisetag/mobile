@@ -1,7 +1,7 @@
+import { observer } from "mobx-react-lite";
+import { useMst } from "../models/root";
 import AuthNavigator from "./AuthNavigator";
 import HomeNavigator from "./HomeNavigator";
-import { useMst } from "../models/root";
-import { observer } from "mobx-react-lite";
 
 const AppNavigator = () => {
   const { auth } = useMst();

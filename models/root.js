@@ -1,7 +1,7 @@
+import * as SecureStore from "expo-secure-store";
 import { onSnapshot, types } from "mobx-state-tree";
 import { createContext, useContext } from "react";
 import AuthStore from "./auth";
-import * as SecureStore from "expo-secure-store";
 import DrawerStore from "./drawer";
 
 const RootModel = types.model({

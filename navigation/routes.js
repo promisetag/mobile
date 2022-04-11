@@ -4,4 +4,5 @@ export default Object.freeze({
   CART: "Cart",
   PRODUCT_DETAIL: "ProductDetail",
   GENERATE_QR: "GenerateQR",
+  MY_ACCOUNT: "MyAccount"
 });

@@ -3,6 +3,7 @@ import { HStack } from "native-base";
 import CogOutlineIcon from "../assets/icons/CogOutlineIcon";
 import ShoppingCartIcon from "../assets/icons/ShoppingCartIcons";
 import { useMst } from "../models/root";
+import MyAccountScreen from "../screens/store/MyAccountScreen";
 import CartScreen from "../screens/store/CartScreen";
 import CategoryScreen from "../screens/store/CategoryScreen";
 import GenerateQRScreen from "../screens/store/GenerateQRScreen";
@@ -31,6 +32,12 @@ const StoreNavigator = () => {
         ),
       })}
     >
+    <StoreStack.Screen name={routes.MY_ACCOUNT} component={MyAccountScreen} options={{
+      headerShadowVisible: false,
+      headerStyle: {
+        backgroundColor: '#f5f5f5',
+      }
+    }} />
       <StoreStack.Screen name={routes.CATEGORY} component={CategoryScreen} />
       <StoreStack.Screen
         name={routes.PRODUCT_LIST}
