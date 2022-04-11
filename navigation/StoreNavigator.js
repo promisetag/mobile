@@ -10,6 +10,7 @@ import GenerateQRScreen from "../screens/store/GenerateQRScreen";
 import ProductDetailScreen from "../screens/store/ProductDetailScreen";
 import ProductListScreen from "../screens/store/ProductListScreen";
 import routes from "./routes";
+import PromisetagScreen from "../screens/store/PromistagScreen";
 
 const StoreStack = createNativeStackNavigator();
 
@@ -32,6 +33,12 @@ const StoreNavigator = () => {
         ),
       })}
     >
+        <StoreStack.Screen name={routes.PROMISE_TAG} component={PromisetagScreen} options={{
+            headerShadowVisible: false,
+            headerStyle: {
+                backgroundColor: '#f5f5f5',
+            }
+        }} />
     <StoreStack.Screen name={routes.MY_ACCOUNT} component={MyAccountScreen} options={{
       headerShadowVisible: false,
       headerStyle: {
