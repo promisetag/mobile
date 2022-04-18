@@ -3,14 +3,15 @@ import { HStack } from "native-base";
 import CogOutlineIcon from "../assets/icons/CogOutlineIcon";
 import ShoppingCartIcon from "../assets/icons/ShoppingCartIcons";
 import { useMst } from "../models/root";
-import MyAccountScreen from "../screens/store/MyAccountScreen";
 import CartScreen from "../screens/store/CartScreen";
 import CategoryScreen from "../screens/store/CategoryScreen";
+import FileListScreen from "../screens/store/FileListScreen";
 import GenerateQRScreen from "../screens/store/GenerateQRScreen";
+import MyAccountScreen from "../screens/store/MyAccountScreen";
 import ProductDetailScreen from "../screens/store/ProductDetailScreen";
 import ProductListScreen from "../screens/store/ProductListScreen";
-import routes from "./routes";
 import PromisetagScreen from "../screens/store/PromistagScreen";
+import routes from "./routes";
 
 const StoreStack = createNativeStackNavigator();
 
@@ -33,18 +34,36 @@ const StoreNavigator = () => {
         ),
       })}
     >
-        <StoreStack.Screen name={routes.PROMISE_TAG} component={PromisetagScreen} options={{
-            headerShadowVisible: false,
-            headerStyle: {
-                backgroundColor: '#f5f5f5',
-            }
-        }} />
-    <StoreStack.Screen name={routes.MY_ACCOUNT} component={MyAccountScreen} options={{
-      headerShadowVisible: false,
-      headerStyle: {
-        backgroundColor: '#f5f5f5',
-      }
-    }} />
+      <StoreStack.Screen
+        name={routes.PROMISE_TAG}
+        component={PromisetagScreen}
+        options={{
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: "#f5f5f5",
+          },
+        }}
+      />
+      <StoreStack.Screen
+        name={routes.FILE_LIST}
+        component={FileListScreen}
+        options={{
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: "#f5f5f5",
+          },
+        }}
+      />
+      <StoreStack.Screen
+        name={routes.MY_ACCOUNT}
+        component={MyAccountScreen}
+        options={{
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: "#f5f5f5",
+          },
+        }}
+      />
       <StoreStack.Screen name={routes.CATEGORY} component={CategoryScreen} />
       <StoreStack.Screen
         name={routes.PRODUCT_LIST}

@@ -6,4 +6,6 @@ export default Object.freeze({
   GENERATE_QR: "GenerateQR",
   MY_ACCOUNT: "MyAccount",
   PROMISE_TAG: "PromiseTag",
+  FILE_LIST: "FileList",
+  CART_DELIVERY: "CartDelivery"
 });
