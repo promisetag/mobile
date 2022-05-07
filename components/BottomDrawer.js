@@ -1,9 +1,9 @@
 import { Feather } from "@expo/vector-icons";
-import { observer } from "mobx-react-lite";
-import { useMst } from "../models/root";
 import { useNavigation } from "@react-navigation/native";
+import { observer } from "mobx-react-lite";
 import { Actionsheet, Icon, ScrollView } from "native-base";
-import actionSheetItems from "../fixtures/ActionSheetItems";
+import actionSheetItems from "../constants/ActionSheetItems";
+import { useMst } from "../models/root";
 
 const BottomDrawer = () => {
   const { drawer, auth } = useMst();

@@ -6,7 +6,7 @@ import HomeNavigator from "./HomeNavigator";
 const AppNavigator = () => {
   const { auth } = useMst();
 
-  return auth.isLoggedIn ? <AuthNavigator /> : <HomeNavigator />;
+  return auth.isLoggedIn ? <HomeNavigator /> : <AuthNavigator />;
 };
 
 export default observer(AppNavigator);

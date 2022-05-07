@@ -1,4 +1,6 @@
 export default Object.freeze({
+  LOGIN: "Login",
+  REGISTER: "Register",
   CATEGORY: "Category",
   PRODUCT_LIST: "ProductList",
   CART: "Cart",
@@ -7,5 +9,5 @@ export default Object.freeze({
   MY_ACCOUNT: "MyAccount",
   PROMISE_TAG: "PromiseTag",
   FILE_LIST: "FileList",
-  CART_DELIVERY: "CartDelivery"
+  CART_DELIVERY: "CartDelivery",
 });

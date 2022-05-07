@@ -1,39 +1,77 @@
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import {
   Box,
   Heading,
   HStack,
-  IconButton, SearchIcon,
-  SectionList,
-  StatusBar
+  Icon,
+  IconButton,
+  Image,
+  Select,
+  StatusBar,
+  Text,
+  VStack
 } from "native-base";
-import DotsVerticalIcon from "../../assets/icons/DotsVerticalIcon";
+import { useState } from "react";
+import CartTabs from "../../components/CartTabs";
 import Screen from "../../components/Screen";
 
-
-
 const CartDeliveryScreen = () => {
+  const [quantity, setQuantity] = useState("1");
+
   return (
     <Screen>
       <StatusBar barStyle={"dark-content"} />
-      <Box mx="4">
-        <HStack justifyContent="space-between">
-          <Heading size="md">{title}</Heading>
+        <Box bg="white" rounded="md" p="4" m="4">
           <HStack space="4">
-            <IconButton icon={<SearchIcon size="4" />} variant="ghost" />
-            <IconButton icon={<DotsVerticalIcon size="4" />} />
+            <Image
+              source={require("../../assets/images/qr/tagpng.png")}
+              alt="product"
+              size="md"
+              resizeMode="contain"
+            />
+            <VStack space="4">
+              <HStack justifyContent="space-between">
+                <Heading size="sm" width="60%">
+                  Promisetag metal token with chain
+                </Heading>
+                <IconButton
+                  icon={
+                    <MaterialCommunityIcons
+                      name="delete-outline"
+                      size={24}
+                      color="red"
+                    />
+                  }
+                />
+              </HStack>
+              <HStack justifyContent="space-between" alignItems="center">
+                <HStack alignItems="center" space="2">
+                  <Text>Qty:</Text>
+                  <Select
+                    w="12"
+                    selectedValue={quantity}
+                    onValueChange={(itemValue) => setQuantity(itemValue)}
+                    dropdownIcon={
+                      <Icon
+                        as={Ionicons}
+                        name="chevron-down-sharp"
+                        size="4"
+                        key="font-family"
+                      />
+                    }
+                  >
+                    <Select.Item value="1" label="1" key="1" />
+                    <Select.Item value="2" label="2" key="2" />
+                    <Select.Item value="3" label="3" key="3" />
+                    <Select.Item value="4" label="4" key="4" />
+                  </Select>
+                </HStack>
+                <Heading size="sm">Rs. 1045</Heading>
+              </HStack>
+            </VStack>
           </HStack>
-        </HStack>
-        <SectionList
-          sections={data}
-          keyExtractor={(item, index) => item + index}
-          renderSectionHeader={({ section: { title } }) => (
-            <Heading size="sm" my="4">
-              {title}
-            </Heading>
-          )}
-          renderItem={(item) => <Item item={item} />}
-        />
-      </Box>
+        </Box>
+        <CartTabs />
     </Screen>
   );
 };

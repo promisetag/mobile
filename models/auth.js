@@ -1,6 +1,7 @@
-import { types, flow } from "mobx-state-tree";
 import * as Device from "expo-device";
+import { flow, types } from "mobx-state-tree";
 import { Alert } from "react-native";
+import { BASE_URL, HTTP_CLIENT_HEADERS } from "../constants/http-client";
 
 const AuthStore = types
   .model({
@@ -8,6 +9,7 @@ const AuthStore = types
     id: types.optional(types.number, 0),
     email: types.optional(types.string, ""),
     name: types.optional(types.string, ""),
+    mobile: types.optional(types.string, ""),
     token: types.optional(types.string, ""),
   })
   .actions((self) => ({
@@ -17,25 +19,60 @@ const AuthStore = types
       self.id = updatedState.id;
       self.name = updatedState.name;
       self.email = updatedState.email;
+      self.mobile = updatedState.mobile_no;
     },
+    register: flow(function* register(
+      name,
+      email,
+      mobileNo,
+      countryCode,
+      password
+    ) {
+      self.state = "pending";
+      try {
+        const response = yield fetch(`${BASE_URL}/auth/register`, {
+          method: "POST",
+          body: JSON.stringify({
+            name,
+            email,
+            mobileNo,
+            countryCode,
+            password,
+            deviceName: Device.deviceName,
+          }),
+          headers: HTTP_CLIENT_HEADERS,
+        });
+
+        const result = yield response.json();
+
+        if (response.ok) {
+          console.log(result);
+          self.login(email, password);
+        } else {
+          Alert.alert("Failed to login", result.message);
+          self.state = "guest";
+        }
+      } catch (error) {
+        Alert.alert("Failed to login", error.message);
+        self.state = "guest";
+      }
+    }),
     login: flow(function* login(email, password) {
       self.state = "pending";
       try {
-        const response = yield fetch("http://10.0.2.2:8000/api/auth/login", {
+        const response = yield fetch(`${BASE_URL}/auth/login`, {
           method: "POST",
           body: JSON.stringify({
             email,
             password,
-            device_name: Device.deviceName,
+            deviceName: Device.deviceName,
           }),
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
+          headers: HTTP_CLIENT_HEADERS,
         });
+
         const result = yield response.json();
 
-        if (response.status == 201) {
+        if (response.ok) {
           const updatedAuth = {
             ...result.user,
             ...{ token: result.token, state: "user" },

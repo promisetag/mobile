@@ -3,6 +3,7 @@ import { HStack } from "native-base";
 import CogOutlineIcon from "../assets/icons/CogOutlineIcon";
 import ShoppingCartIcon from "../assets/icons/ShoppingCartIcons";
 import { useMst } from "../models/root";
+import CartDeliveryScreen from "../screens/store/CartDeliveryScreen";
 import CartScreen from "../screens/store/CartScreen";
 import CategoryScreen from "../screens/store/CategoryScreen";
 import FileListScreen from "../screens/store/FileListScreen";
@@ -20,6 +21,7 @@ const StoreNavigator = () => {
 
   return (
     <StoreStack.Navigator
+    initialRouteName={routes.CART_DELIVERY}
       screenOptions={({ navigation }) => ({
         animation: "slide_from_right",
         headerTitle: `Hi ${auth.firstName}`,
@@ -84,6 +86,7 @@ const StoreNavigator = () => {
           headerTitle: "Your Cart",
         })}
       />
+    <StoreStack.Screen name={routes.CART_DELIVERY} component={CartDeliveryScreen} />
     </StoreStack.Navigator>
   );
 };

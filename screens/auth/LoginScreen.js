@@ -1,15 +1,20 @@
 import { observer } from "mobx-react-lite";
 import { useState } from "react";
-import {
-  Pressable,
-  Text,
-  View,
-  Image,
-  TextInput,
-  StyleSheet,
-  ActivityIndicator,
-} from "react-native";
 import { useMst } from "../../models/root";
+import Screen from "../../components/Screen";
+import {
+  VStack,
+  Image,
+  StatusBar,
+  Input,
+  HStack,
+  Spinner,
+  Text,
+  Pressable,
+  Icon,
+  Button,
+} from "native-base";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -21,111 +26,60 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={{ backgroundColor: "#ffd8d9", height: "100%" }}>
-      {auth.state == "pending" && (
-        <ActivityIndicator size="large" color="#00ff00" style={styles.loader} />
-      )}
-      <Image
-        source={require("../../assets/images/login-bg.png")}
-        style={{ marginLeft: -16, marginBottom: 16, height: "40%" }}
-      />
-      <View style={styles.container}>
-        <View style={{ width: "auto" }}>
-          <TextInput
-            placeholder="email"
-            style={styles.input}
-            value={email}
-            onChangeText={(text) => setEmail(text)}
-          />
-          <TextInput
-            placeholder="password"
-            style={styles.input}
-            value={password}
-            secureTextEntry={true}
-            onChangeText={(text) => setPassword(text)}
-          />
-          <Text style={{ textAlign: "center" }}>Forgot Password?</Text>
-          <Pressable style={styles.button_login} onPress={login}>
-            <Text style={styles.button_login_text}>Login</Text>
-          </Pressable>
-          <Text style={{ textAlign: "center", marginTop: 16 }}>
-            Or login with
-          </Text>
-          <View style={styles.button_group_social}>
+    <Screen>
+      <StatusBar barStyle={"dark-content"} />
+      {auth.state === "pending" && <Spinner size="lg" />}
+      <VStack px={"4"} space={"4"} bg={"white"} borderBottomRadius={"20"}>
+        <Image
+          source={require("../../assets/images/login-bg-new.png")}
+          w={"95%"}
+          h={"50%"}
+          mx={"auto"}
+          alt="Login Image"
+        />
+        <Input
+          placeholder="email"
+          value={email}
+          onChangeText={(text) => setEmail(text)}
+        />
+        <Input
+          placeholder="password"
+          value={password}
+          type={password}
+          onChangeText={(text) => setPassword(text)}
+        />
+        <Text textAlign={"right"}>Forgot Password?</Text>
+        <Button size={"lg"} onPress={login}>
+          Login
+        </Button>
+        <VStack alignItems={"center"} space={"2"}>
+          <Text>Or login with</Text>
+          <HStack space={"2"}>
             <Image
               source={require("../../assets/images/834722_facebook_icon.png")}
-              style={styles.button_social}
+              size={"xs"}
+              alt={"fb icon"}
             />
             <Image
               source={require("../../assets/images/google-logo-9808.png")}
-              style={styles.button_social}
+              size={"xs"}
+              alt={"google icon"}
             />
-          </View>
-          <Text style={{ textAlign: "center" }}>
-            Don't have an account?{" "}
+          </HStack>
+          <HStack>
+            <Text>Don't have an account? </Text>
             <Pressable onPress={() => navigation.navigate("Register")}>
-              <Text style={{ fontWeight: "bold" }}>Sign Up</Text>
+              <Text fontWeight={"bold"}>Sign Up</Text>
             </Pressable>
-          </Text>
-        </View>
-      </View>
-    </View>
+          </HStack>
+        </VStack>
+      </VStack>
+      <HStack justifyContent="flex-end" my={"2"} mr={"4"} alignItems={"center"}>
+        <Text>Continue as guest</Text>
+        <Icon as={<MaterialIcons name="arrow-right" />} size={"md"} />
+      </HStack>
+    </Screen>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "white",
-    height: "100%",
-    borderTopRightRadius: 48,
-    borderTopLeftRadius: 48,
-    paddingTop: 30,
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-  input: {
-    height: 50,
-    textAlign: "center",
-    fontSize: 16,
-    margin: 12,
-    borderWidth: 1,
-    paddingVertical: 10,
-    width: 250,
-    borderRadius: 25,
-  },
-
-  button_login: {
-    backgroundColor: "black",
-    height: 50,
-    borderRadius: 25,
-    flexDirection: "row",
-    justifyContent: "center",
-    marginTop: 16,
-    alignItems: "center",
-  },
-  button_login_text: {
-    color: "white",
-    textAlign: "center",
-    letterSpacing: 1,
-  },
-  button_social: { width: 40, height: 40, marginHorizontal: 8 },
-  button_group_social: {
-    marginVertical: 16,
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-  loader: {
-    position: "absolute",
-    justifyContent: "center",
-    alignContent: "center",
-    top: 0,
-    bottom: 0,
-    right: 0,
-    left: 0,
-    backgroundColor: "#ffffff",
-    opacity: 0.9,
-    zIndex: 9999,
-  },
-});
 
 export default observer(LoginScreen);
