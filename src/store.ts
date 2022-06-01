@@ -1,7 +1,8 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import drawerReducer from "./features/drawer/drawerSlice";
-import authReducer from "./features/auth/authSlice";
-import boardingReducer from "./features/boarding/boardingSlice";
+import drawerReducer from "./features/drawerSlice";
+import authReducer from "./features/authSlice";
+import boardingReducer from "./features/boardingSlice";
+import categoryReducer from "./features/categorySlice";
 import { promisetagApi } from "./services/promisetag-api";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -20,6 +21,7 @@ const reducers = combineReducers({
   drawer: drawerReducer,
   auth: authReducer,
   boarding: boardingReducer,
+  category: categoryReducer,
 });
 
 const persistConfig = {

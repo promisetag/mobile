@@ -1,6 +1,6 @@
 import Onboarding from "react-native-onboarding-swiper";
 import { Button, Image, StatusBar, Text } from "native-base";
-import { userBoarded } from "../features/boarding/boardingSlice";
+import { userBoarded } from "../features/boardingSlice";
 import { useGetTourPagesQuery } from "../services/promisetag-api";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRef } from "react";

@@ -1,8 +1,8 @@
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { Actionsheet, Icon, ScrollView } from "native-base";
-import { close } from "../features/drawer/drawerSlice";
-import { logout } from "../features/auth/authSlice";
+import { close } from "../features/drawerSlice";
+import { logout } from "../features/authSlice";
 import { useAppDispatch, useAppSelector } from "../hooks/redux-toolkit";
 
 export const BottomDrawer = () => {

@@ -1,9 +1,9 @@
 import { extendTheme } from "native-base";
-import { fontConfig, fonts } from "./fonts";
+import { fontConfig } from "./fonts";
 
 const borno = extendTheme({
   fontConfig,
-  fonts,
+  // fonts,
 });
 
 export default borno;

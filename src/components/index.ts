@@ -1,7 +1,7 @@
 // export * from "./AccountHeader";
 export * from "./BottomDrawer";
 // export * from "./CartTabs";
-export * from "./Category";
+export * from "./CategoryItem";
 // export * from "./ChooseFont";
 // export * from "./ChooseIcon";
 // export * from "./DeliveryTab";

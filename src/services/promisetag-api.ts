@@ -8,6 +8,7 @@ export interface TourPage {
 }
 
 export interface Category {
+  id: number;
   background_color: string;
   image_url: string;
   title: string;

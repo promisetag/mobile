@@ -1,9 +1,10 @@
 import { useAppSelector } from "../hooks/redux-toolkit";
-import { AuthNavigator } from "./AuthNavigator";
-import { GuestNavigator } from "./GuestNavigator";
+import { CategorySelectedScreen } from "../screens";
 
 export const AppNavigator = () => {
   const authenticated = useAppSelector((state) => state.auth.authenticated);
 
-  return authenticated ? <AuthNavigator /> : <GuestNavigator />;
+  return <CategorySelectedScreen />;
+
+  // return authenticated ? <AuthNavigator /> : <GuestNavigator />;
 };

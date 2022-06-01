@@ -13,3 +13,5 @@ export * from "./ScannerScreen";
 export * from "./TourScreen";
 // export * from "./CartScreen";
 export * from "./CategoryScreen";
+export * from "./LoadingScreen";
+export * from "./CategorySelectedScreen";
