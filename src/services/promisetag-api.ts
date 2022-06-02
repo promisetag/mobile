@@ -13,6 +13,9 @@ export interface Category {
   image_url: string;
   title: string;
   description: string;
+  tag_quantity?: string;
+  storage_space_quantity?: string;
+  storage_space_unit?: string;
 }
 
 export const promisetagApi = createApi({

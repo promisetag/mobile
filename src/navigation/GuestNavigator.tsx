@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { TabNavigator } from "./TabNavigator";
 import { TourScreen } from "../screens";
 import { useAppSelector } from "../hooks/redux-toolkit";
+import { TabNavigator } from "./TabNavigator";
 
 const GuestStack = createNativeStackNavigator();
 
@@ -32,7 +32,9 @@ export const GuestNavigator = () => {
       <GuestStack.Screen
         name="Tab"
         component={TabNavigator}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+        }}
       />
     </GuestStack.Navigator>
   );

@@ -2,6 +2,7 @@ export const routes = Object.freeze({
   LOGIN: "Login",
   REGISTER: "Register",
   CATEGORY: "Category",
+  CATEGORY_SELECTED: "CategorySelected",
   PRODUCT_LIST: "ProductList",
   CART: "Cart",
   PRODUCT_DETAIL: "ProductDetail",

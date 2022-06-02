@@ -1,28 +1,48 @@
 import {
   Box,
+  Button,
   Heading,
   HStack,
   Icon,
   Image,
-  Pressable,
   Text,
   VStack,
 } from "native-base";
 import { Screen } from "../components";
-import { Feather, MaterialIcons } from "@expo/vector-icons";
-import { routes } from "../constants";
+import {
+  Feather,
+  MaterialCommunityIcons,
+  MaterialIcons,
+} from "@expo/vector-icons";
+import { useAppSelector } from "../hooks/redux-toolkit";
 
-function CategorySelectedInfo({ title, quantity, children, navigation }) {
+function CategorySelectedInfo({
+  title,
+  quantity,
+  children,
+  storageSpace,
+  storageUnit,
+}) {
   return (
-    <VStack bg={"white"} p={"4"} space={"4"} shadow={"2"} rounded={"lg"}>
+    <VStack
+      bg={"white"}
+      p={"8"}
+      space={"4"}
+      shadow={"2"}
+      rounded={"lg"}
+      color={"muted.300"}
+    >
       <Heading textAlign={"center"}>{title}</Heading>
-      <Text fontSize={"md"}>{children}</Text>
+      <Text fontSize={"sm"} textAlign={"center"}>
+        {children}
+      </Text>
       <VStack>
         <HStack
           space={4}
           borderBottomColor={"gray.200"}
           borderBottomWidth={"1"}
           p={"2"}
+          alignItems={"center"}
         >
           <Icon as={<Feather name={"smartphone"} />} size={"8"} />
           <Text>{quantity} Promisetag</Text>
@@ -32,6 +52,7 @@ function CategorySelectedInfo({ title, quantity, children, navigation }) {
           borderBottomColor={"gray.200"}
           borderBottomWidth={"1"}
           p={"2"}
+          alignItems={"center"}
         >
           <Icon as={<MaterialIcons name={"qr-code"} />} size={"8"} />
           <Text>1 QR Code</Text>
@@ -41,31 +62,25 @@ function CategorySelectedInfo({ title, quantity, children, navigation }) {
           borderBottomColor={"gray.200"}
           borderBottomWidth={"1"}
           p={"2"}
+          alignItems={"center"}
         >
           <Icon as={<MaterialIcons name={"format-paint"} />} size={"8"} />
           <Text>1 Customizations</Text>
         </HStack>
-      </VStack>
-      <HStack justifyContent={"center"}>
-        <Pressable
-          w={12}
-          h={12}
-          bg={"teal.500"}
-          rounded={"full"}
-          justifyContent={"center"}
-          alignItems={"center"}
-          onPress={() => navigation.navigate(routes.PRODUCT_LIST)}
-        >
-          <Text color={"white"} fontSize={"lg"}>
-            OK
+        <HStack space={4} p={"2"} alignItems={"center"}>
+          <Icon as={<MaterialCommunityIcons name={"floppy"} />} size={"8"} />
+          <Text>
+            {storageSpace} {storageUnit}
           </Text>
-        </Pressable>
-      </HStack>
+        </HStack>
+      </VStack>
     </VStack>
   );
 }
 
 export const CategorySelectedScreen = ({ navigation }) => {
+  const { title, tagQuantity, storageSpaceQuantity, storageSpaceUnit } =
+    useAppSelector((state) => state.category);
   return (
     <Screen>
       <Box flex={1}>
@@ -87,17 +102,18 @@ export const CategorySelectedScreen = ({ navigation }) => {
           w={"full"}
           h={"full"}
         ></Box>
-        <Box px={16} py={"8"}>
-          <Heading textAlign={"center"} color={"white"} mb={24}>
-            For whom do you need this Promisetag for?
-          </Heading>
+        <Box px={16} py={"8"} flex={"1"} justifyContent={"center"}>
           <CategorySelectedInfo
-            title={"For Myself"}
-            quantity={"1"}
-            navigation={navigation}
+            title={title}
+            quantity={tagQuantity}
+            storageSpace={storageSpaceQuantity}
+            storageUnit={storageSpaceUnit}
           >
             You get one Promisetag for the promises you make to yourself.
           </CategorySelectedInfo>
+          <Button mt={"12"} size={"lg"} colorScheme={"teal"}>
+            Next
+          </Button>
         </Box>
       </Box>
     </Screen>

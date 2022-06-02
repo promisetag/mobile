@@ -1,6 +1,6 @@
 import { LoadingScreen } from "./LoadingScreen";
 import { FlatList } from "react-native";
-import { Heading } from "native-base";
+import { Box, Heading } from "native-base";
 import { CategoryItem, Screen } from "../components";
 import { useGetCategoriesQuery } from "../services/promisetag-api";
 
@@ -21,12 +21,14 @@ export const CategoryScreen = ({ navigation }) => {
 
   return (
     <Screen>
-      <Heading>Why are you here?</Heading>
-      <FlatList
-        data={categories}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-      />
+      <Box p={"8"}>
+        <Heading>Why are you here?</Heading>
+        <FlatList
+          data={categories}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+        />
+      </Box>
     </Screen>
   );
 };

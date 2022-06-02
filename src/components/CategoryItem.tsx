@@ -1,4 +1,11 @@
-import { AspectRatio, Box, Heading, Image, Text, VStack } from "native-base";
+import {
+  Box,
+  Heading,
+  Image,
+  Text,
+  useContrastText,
+  VStack,
+} from "native-base";
 import { Pressable } from "react-native";
 import { routes } from "../constants";
 import { useAppDispatch } from "../hooks/redux-toolkit";
@@ -6,30 +13,31 @@ import { setCategory } from "../features/categorySlice";
 
 export const CategoryItem = ({ item, navigation }) => {
   const dispatch = useAppDispatch();
+  const textColor = useContrastText(item.background_color);
 
   const onCategorySelected = () => {
-    dispatch(setCategory(item.title));
-    navigation.navigate(routes.PRODUCT_LIST, { categoryId: item.id });
+    dispatch(setCategory(item));
+    navigation.navigate(routes.CATEGORY_SELECTED);
   };
 
   return (
     <Pressable onPress={onCategorySelected}>
-      <Box
-        my="4"
-        bg={item.background_color}
-        position="relative"
-        borderRadius="32"
-        px="8"
-        h="40"
-      >
-        <Box position="absolute" top="0" right="0" bottom="0">
-          <AspectRatio h="100%" ratio={2 / 3}>
-            <Image source={{ uri: item.image_url }} alt="title" />
-          </AspectRatio>
-        </Box>
-        <VStack space="sm" w="3/5" position="absolute" bottom="4" left="8">
-          <Heading textTransform="uppercase">{item.title}</Heading>
-          <Text isTruncated noOfLines={2}>
+      <Box my="4" bg={item.background_color} borderRadius="8" px="8" py={"8"}>
+        <Image
+          position={"absolute"}
+          bottom={0}
+          right={0}
+          src={item.image_url}
+          size={"xl"}
+          key={item.title}
+          resizeMode={"contain"}
+          alt={item.title}
+        />
+        <VStack space="sm" w="3/5">
+          <Heading textTransform="uppercase" size={"md"} color={textColor}>
+            {item.title}
+          </Heading>
+          <Text isTruncated noOfLines={2} color={textColor}>
             {item.description}
           </Text>
         </VStack>
