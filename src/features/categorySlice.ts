@@ -4,6 +4,7 @@ import { Category } from "../services/promisetag-api";
 export interface CategoryState {
   id?: number;
   backgroundColor?: string;
+  backgroundImageUrl?: string;
   imageUrl?: string;
   title?: string;
   description?: string;
@@ -15,6 +16,7 @@ export interface CategoryState {
 const initialState = {
   id: null,
   backgroundColor: null,
+  backgroundImageUrl: null,
   imageUrl: null,
   title: null,
   description: null,
@@ -31,6 +33,7 @@ export const categorySlice = createSlice({
       state.id = action.payload.id;
       state.backgroundColor = action.payload.background_color;
       state.imageUrl = action.payload.image_url;
+      state.backgroundImageUrl = action.payload.background_image_url;
       state.title = action.payload.title;
       state.description = action.payload.description;
       state.tagQuantity = action.payload.tag_quantity;

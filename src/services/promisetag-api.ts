@@ -11,6 +11,7 @@ export interface Category {
   id: number;
   background_color: string;
   image_url: string;
+  background_image_url: string;
   title: string;
   description: string;
   tag_quantity?: string;

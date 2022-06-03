@@ -79,8 +79,13 @@ function CategorySelectedInfo({
 }
 
 export const CategorySelectedScreen = ({ navigation }) => {
-  const { title, tagQuantity, storageSpaceQuantity, storageSpaceUnit } =
-    useAppSelector((state) => state.category);
+  const {
+    title,
+    backgroundImageUrl,
+    tagQuantity,
+    storageSpaceQuantity,
+    storageSpaceUnit,
+  } = useAppSelector((state) => state.category);
   return (
     <Screen>
       <Box flex={1}>
@@ -91,7 +96,7 @@ export const CategorySelectedScreen = ({ navigation }) => {
           h={"full"}
           flex={"1"}
           resizeMode={"cover"}
-          source={require("../assets/images/samples/portrait.jpg")}
+          src={backgroundImageUrl}
           alt={"portrait"}
         />
         <Box
