@@ -29,10 +29,10 @@ export const promisetagApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getTourPages: builder.query<TourPage[], null>({
+    getTourPages: builder.query<TourPage[], void>({
       query: () => "/tour-pages",
     }),
-    getCategories: builder.query<Category[], null>({
+    getCategories: builder.query<Category[], void>({
       query: () => "/categories",
     }),
   }),

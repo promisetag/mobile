@@ -12,3 +12,5 @@ export * from "./Screen";
 // export * from "./UpdateName";
 // export * from "./UploadMemories";
 // export * from "./UserAvatar";
+export * from "./ImageCarousel";
+export * from "./StarRating";

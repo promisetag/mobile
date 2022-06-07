@@ -15,6 +15,7 @@ import {
   MaterialIcons,
 } from "@expo/vector-icons";
 import { useAppSelector } from "../hooks/redux-toolkit";
+import { routes } from "../constants";
 
 function CategorySelectedInfo({
   title,
@@ -116,7 +117,12 @@ export const CategorySelectedScreen = ({ navigation }) => {
           >
             You get one Promisetag for the promises you make to yourself.
           </CategorySelectedInfo>
-          <Button mt={"12"} size={"lg"} colorScheme={"teal"}>
+          <Button
+            mt={"12"}
+            size={"lg"}
+            colorScheme={"teal"}
+            onPress={() => navigation.navigate(routes.PRODUCT_LIST)}
+          >
             Next
           </Button>
         </Box>

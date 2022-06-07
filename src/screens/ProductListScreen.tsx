@@ -1,150 +1,124 @@
 import {
-  AspectRatio,
   Box,
+  Button,
+  Heading,
   HStack,
   Image,
-  Input,
-  Pressable,
-  VStack,
+  ScrollView,
+  Text,
 } from "native-base";
-import { FlatList } from "react-native";
-import { ProductListDetail } from "../components";
-import { routes } from "../constants";
-import { Ionicons } from "@expo/vector-icons";
+import { useWindowDimensions } from "react-native";
+import { ImageCarousel, StarRating } from "../components";
 
-export const ProductListScreen = ({ route, navigation }) => {
-  const PRODUCTS = [
+const product = {
+  images: [
+    {
+      id: 1,
+      image_url: require("../assets/images/samples/products/product_image_001.jpg"),
+      thumbnail_url: require("../assets/images/samples/products/thumbnails/product_image_001_tn.jpg"),
+    },
+    {
+      id: 2,
+      image_url: require("../assets/images/samples/products/product_image_002.jpg"),
+      thumbnail_url: require("../assets/images/samples/products/thumbnails/product_image_002_tn.jpg"),
+    },
     {
       id: 3,
-      title: "Mens Cotton Jacket",
-      price: 55.99,
-      description:
-        "great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.",
-      category: "men's clothing",
-      image: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
-      rating: {
-        rate: 4.7,
-        count: 500,
-      },
+      image_url: require("../assets/images/samples/products/product_image_003.jpg"),
+      thumbnail_url: require("../assets/images/samples/products/thumbnails/product_image_003_tn.jpg"),
+    },
+  ],
+  variants: [
+    {
+      type: "surface",
+      value: "gold",
     },
     {
-      id: 4,
-      title: "Mens Casual Slim Fit",
-      price: 15.99,
-      description:
-        "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
-      category: "men's clothing",
-      image: "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
-      rating: {
-        rate: 2.1,
-        count: 430,
-      },
+      type: "surface",
+      value: "silver",
     },
-    {
-      id: 5,
-      title:
-        "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
-      price: 695,
-      description:
-        "From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.",
-      category: "jewelery",
-      image: "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg",
-      rating: {
-        rate: 4.6,
-        count: 400,
-      },
-    },
-    {
-      id: 6,
-      title: "Solid Gold Petite Micropave ",
-      price: 168,
-      description:
-        "Satisfaction Guaranteed. Return or exchange any order within 30 days.Designed and sold by Hafeez Center in the United States. Satisfaction Guaranteed. Return or exchange any order within 30 days.",
-      category: "jewelery",
-      image: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg",
-      rating: {
-        rate: 3.9,
-        count: 70,
-      },
-    },
-    {
-      id: 7,
-      title: "White Gold Plated Princess",
-      price: 9.99,
-      description:
-        "Classic Created Wedding Engagement Solitaire Diamond Promise Ring for Her. Gifts to spoil your love more for Engagement, Wedding, Anniversary, Valentine's Day...",
-      category: "jewelery",
-      image: "https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg",
-      rating: {
-        rate: 3,
-        count: 400,
-      },
-    },
-    {
-      id: 8,
-      title: "Pierced Owl Rose Gold Plated Stainless Steel Double",
-      price: 10.99,
-      description:
-        "Rose Gold Plated Double Flared Tunnel Plug Earrings. Made of 316L Stainless Steel",
-      category: "jewelery",
-      image: "https://fakestoreapi.com/img/51UDEzMJVpL._AC_UL640_QL65_ML3_.jpg",
-      rating: {
-        rate: 1.9,
-        count: 100,
-      },
-    },
-  ];
+  ],
+  name: "The Promise Lovetag",
+  ratings: {
+    review_count: 36,
+    avg_rating: 4,
+  },
+  original_price: 2349,
+  discounted_price: 1499,
+  quantity: 12,
+  description:
+    "Real toys left for makers then and should in farther had arranged return in seven. Business parents'. Star was, events, of forward a repeat troubled caution like so universal little. Best term every their it that with involved. Lift times, then their he epic I many to and deep follow.",
+  quantity_threshold: 15,
+};
 
-  const renderProduct = ({ item }) => (
-    <Pressable
-      onPress={() =>
-        navigation.navigate(routes.PRODUCT_DETAIL, { id: item.id })
-      }
-    >
-      <ProductListDetail
-        thumbnailUrl={item.image}
-        title={item.title}
-        price={item.price}
-        reviews={item.rating.rate}
-      />
-    </Pressable>
-  );
+const images = [];
 
-  const { id } = route.params;
-
+export const ProductListScreen = ({ route, navigation }) => {
+  const windowHeight = useWindowDimensions().height;
+  const windowWidth = useWindowDimensions().width;
   return (
-    <Box bgColor="white" flex="1" p="4" pb="64">
-      <VStack space="4">
-        <HStack w="full" alignItems="center" space="4">
-          <Input
-            flex="1"
-            variant="rounded"
-            pl="4"
-            borderColor="trueGray.700"
-            InputRightElement={
-              <Ionicons name="search" size={24} color="black" />
-            }
-            placeholder="Search by pendant name"
-          />
-          <Ionicons name="filter" size={24} color="black" />
-          <Ionicons name="options-outline" size={24} color="black" />
-        </HStack>
-        <AspectRatio ratio={21 / 9}>
-          <Image
-            alt="banner"
-            borderRadius="20"
-            source={{
-              uri: "https://media.istockphoto.com/photos/sale-written-over-red-christmas-baubles-hanging-over-red-background-picture-id1347276250?b=1&k=20&m=1347276250&s=170667a&w=0&h=VX1gQCJgtsxqjvMeIMHraaIW8-uGlKhJcG4Nn9zKs7g=",
-            }}
-          />
-        </AspectRatio>
-        <FlatList
-          data={PRODUCTS}
-          renderItem={renderProduct}
-          numColumns={2}
-          keyExtractor={(item) => item.id}
-        />
-      </VStack>
+    <Box flex={"1"}>
+      <Box h={windowHeight - 170}>
+        <ScrollView>
+          <Box>
+            <Box h={"80"} pb={"4"}>
+              <ImageCarousel
+                data={product.images}
+                width={windowWidth}
+                renderItem={({ item }) => (
+                  <Box>
+                    <Image
+                      key={item.id}
+                      source={item.image_url}
+                      resizeMode={"cover"}
+                      width={windowWidth}
+                      height={64}
+                      alt={`slide_${item.id}`}
+                    />
+                  </Box>
+                )}
+              />
+            </Box>
+          </Box>
+          <Box mt={"10"} mx={"4"}>
+            <Heading size={"lg"}>{product.name}</Heading>
+            <HStack space={"8"}>
+              <StarRating rating={product.ratings.avg_rating} />
+              <Text color={"muted.500"}>
+                {product.ratings.review_count} reviews
+              </Text>
+            </HStack>
+            <HStack justifyContent={"space-between"} alignItems={"center"}>
+              <HStack alignItems={"center"} space={"4"} my={"3"}>
+                <Text fontSize={"2xl"} fontWeight={"bold"}>
+                  Rs. {product.discounted_price}
+                </Text>
+                <Text
+                  fontSize={"lg"}
+                  color={"muted.500"}
+                  textDecorationLine={"line-through"}
+                >
+                  Rs. {product.original_price}
+                </Text>
+              </HStack>
+              <Text color={"red.500"}>
+                {product.quantity <= product.quantity_threshold &&
+                  `Only ${product.quantity} left`}
+              </Text>
+            </HStack>
+            <Heading size={"xs"}>Description</Heading>
+            <Box>
+              <ScrollView>
+                <Text>{product.description}</Text>
+              </ScrollView>
+            </Box>
+          </Box>
+        </ScrollView>
+      </Box>
+      <HStack justifyContent={"space-between"} m={"4"}>
+        <Button colorScheme={"amber"}>Select Preset</Button>
+        <Button>Design Your Own</Button>
+      </HStack>
     </Box>
   );
 };

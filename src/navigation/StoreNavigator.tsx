@@ -3,6 +3,7 @@ import { HStack } from "native-base";
 import { routes } from "../constants";
 import { CategoryScreen, CategorySelectedScreen } from "../screens";
 import { Ionicons } from "@expo/vector-icons";
+import { ProductListScreen } from "../screens/ProductListScreen";
 
 const StoreStack = createNativeStackNavigator();
 
@@ -54,6 +55,10 @@ export const StoreNavigator = () => {
       <StoreStack.Screen
         name={routes.CATEGORY_SELECTED}
         component={CategorySelectedScreen}
+      />
+      <StoreStack.Screen
+        name={routes.PRODUCT_LIST}
+        component={ProductListScreen}
       />
       {/*<StoreStack.Screen*/}
       {/*  name={routes.PRODUCT_LIST}*/}

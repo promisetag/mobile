@@ -5,10 +5,14 @@ import { CategoryItem, Screen } from "../components";
 import { useGetCategoriesQuery } from "../services/promisetag-api";
 
 export const CategoryScreen = ({ navigation }) => {
-  // @ts-ignore
-  const { data: categories, error, isLoading } = useGetCategoriesQuery();
+  const {
+    data: categories,
+    error,
+    isLoading,
+    isError,
+  } = useGetCategoriesQuery();
 
-  if (error) {
+  if (isError) {
     console.log(error);
     // @ts-ignore
     return <Text>Error: {error.error}</Text>;
