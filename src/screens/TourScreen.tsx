@@ -23,7 +23,7 @@ export const TourScreen = ({ navigation }) => {
   const pages = data.map((page) => {
     return {
       backgroundColor: page.background_color,
-      image: <Image src={page.image_url} size={"xl"} alt={page.title} />,
+      image: <Image src={page.image_url} size={"2xl"} alt={page.title} />,
       title: page.title,
       subtitle: page.subtitle,
     };
