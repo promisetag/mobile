@@ -15,35 +15,35 @@ import {
   VStack,
 } from "native-base";
 import { AccountHeader } from "../components/AccountHeader";
-import Screen from "../components/Screen";
 import { UserAvatar } from "../components/UserAvatar";
-import routes from "../constants/routes";
+import { Screen } from "../components";
+import { routes } from "../constants";
 
 const data = [
   {
     id: 1,
-    imageUrl: require("src_bk/assets/images/memories/Video.png"),
+    imageUrl: require("../assets/images/samples/Video.png"),
     title: "My Video Memories",
     spaceUsed: "30 MB",
     fileType: "video",
   },
   {
     id: 2,
-    imageUrl: require("src_bk/assets/images/memories/Image.png"),
+    imageUrl: require("../assets/images/samples/Image.png"),
     title: "Upload Images",
     spaceUsed: "18 MB",
     fileType: "image",
   },
   {
     id: 3,
-    imageUrl: require("src_bk/assets/images/memories/Audio.png"),
+    imageUrl: require("../assets/images/samples/Audio.png"),
     title: "Upload Audio",
     spaceUsed: "12 MB",
     fileType: "audio",
   },
   {
     id: 4,
-    imageUrl: require("src_bk/assets/images/memories/T.png"),
+    imageUrl: require("../assets/images/samples/T.png"),
     title: "Write your heart",
     spaceUsed: "28 KB",
     fileType: "text",
@@ -55,7 +55,7 @@ export const PromisetagScreen = ({ navigation }) => {
   const usedSpace = "60";
 
   return (
-    <Screen style={{}}>
+    <Screen>
       <StatusBar barStyle={"dark-content"} />
       <VStack h={"100%"}>
         <AccountHeader />
@@ -134,13 +134,13 @@ export const PromisetagScreen = ({ navigation }) => {
               <Center position={"relative"}>
                 <Image
                   position={"absolute"}
-                  source={require("src_bk/assets/images/qr/qr-bg.png")}
+                  source={require("../assets/images/samples/qr-bg.png")}
                   alt={"qr-bg"}
                   size={"xl"}
                 />
                 <Image
                   position={"absolute"}
-                  source={require("src_bk/assets/images/qr/qr.png")}
+                  source={require("../assets/images/samples/qr.png")}
                   alt={"qr-bg"}
                   size={"md"}
                 />

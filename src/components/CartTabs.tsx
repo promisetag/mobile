@@ -2,8 +2,8 @@ import { Box, Center, Flex, Text, useColorModeValue } from "native-base";
 import * as React from "react";
 import { Animated, Dimensions, Pressable } from "react-native";
 import { SceneMap, TabView } from "react-native-tab-view";
-import DeliveryTab from "./DeliveryTab";
-import OrderSummaryTab from "./OrderSummaryTab";
+import { DeliveryTab } from "./DeliveryTab";
+import { OrderSummaryTab } from "./OrderSummaryTab";
 
 const PaymentTab = () => (
   <Center flex={1} my="4" key="3">
@@ -111,4 +111,3 @@ export const CartTabs = () => {
     />
   );
 };
-

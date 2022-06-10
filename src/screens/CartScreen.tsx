@@ -16,7 +16,7 @@ import { images } from "../constants";
 
 export const CartScreen = () => {
   return (
-    <Screen style={{}}>
+    <Screen>
       <ScrollView p="4" h="60%">
         <Box bg="white" p="4" borderRadius="sm" shadow="9">
           <HStack space="4">

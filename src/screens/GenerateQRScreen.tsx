@@ -54,6 +54,7 @@ import {
   Box,
   Button,
   Checkbox,
+  Flex,
   HStack,
   Icon,
   IconButton,
@@ -63,13 +64,13 @@ import {
 } from "native-base";
 import { useState } from "react";
 import QRCode from "react-native-qrcode-svg";
-import ShoppingCartIcon from "src/icons/ShoppingCartIcons";
-import ChooseFont from "../components/ChooseFont";
-import ChooseIcon from "../components/ChooseIcon";
-import Screen from "../components/Screen";
-import UpdateName from "../components/UpdateName";
-import UploadMemories from "../components/UploadMemories";
-import routes from "../constants/routes";
+import { Screen } from "../components";
+import { ChooseFont } from "../components/ChooseFont";
+import { UpdateName } from "../components/UpdateName";
+import { UploadMemories } from "../components/UploadMemories";
+import { ChooseIcon } from "../components/ChooseIcon";
+import { routes } from "../constants";
+import ShoppingCartIcon from "../assets/icons/ShoppingCartIcons";
 
 export const GenerateQRScreen = ({ navigation }) => {
   const [customerName, setCustomerName] = useState("Your Name");
@@ -135,12 +136,12 @@ export const GenerateQRScreen = ({ navigation }) => {
     {
       name: "deer",
       alt: "deer-icon",
-      source: require("src_bk/assets/images/qr/deer.png"),
+      source: require("../assets/images/samples/deer.png"),
     },
     {
       name: "alien",
       alt: "alien-icon",
-      source: require("src_bk/assets/images/qr/alien.png"),
+      source: require("../assets/images/samples/alien.png"),
     },
   ];
 
@@ -149,7 +150,7 @@ export const GenerateQRScreen = ({ navigation }) => {
   } else {
     return (
       <>
-        <Screen style={{ backgroundColor: "#b3d1d6" }}>
+        <Screen>
           <VStack>
             <Box h="45%">
               <HStack>
@@ -159,7 +160,7 @@ export const GenerateQRScreen = ({ navigation }) => {
                       Front
                     </Text>
                     <Image
-                      source={require("src_bk/assets/images/qr/tagpng.png")}
+                      source={require("../assets/images/samples/tagpng.png")}
                       alt="tag"
                       size="64"
                       resizeMode="contain"
@@ -174,7 +175,7 @@ export const GenerateQRScreen = ({ navigation }) => {
                     >
                       {tagIcon === "deer" ? (
                         <Image
-                          source={require("src_bk/assets/images/qr/deer.png")}
+                          source={require("../assets/images/samples/deer.png")}
                           alt="deer"
                           key="deer"
                           size="16"
@@ -182,7 +183,7 @@ export const GenerateQRScreen = ({ navigation }) => {
                         />
                       ) : (
                         <Image
-                          source={require("src_bk/assets/images/qr/alien.png")}
+                          source={require("../assets/images/samples/alien.png")}
                           alt="alien"
                           key="alien"
                           size="16"
@@ -205,7 +206,7 @@ export const GenerateQRScreen = ({ navigation }) => {
                       Back
                     </Text>
                     <Image
-                      source={require("src_bk/assets/images/qr/tagpng.png")}
+                      source={require("../assets/images/samples/tagpng.png")}
                       alt="tag"
                       size="64"
                       resizeMode="contain"
@@ -233,9 +234,9 @@ export const GenerateQRScreen = ({ navigation }) => {
             </Box>
             <Box bg="white" h="55%" borderTopRadius="80px" pt="4" px="4">
               <VStack space="4">
-                <Box h="24" as="flex" alignItems="center" position="relative">
+                <Flex h="24" alignItems="center" position="relative">
                   <Image
-                    source={require("src_bk/assets/images/qr/qr-bg.png")}
+                    source={require("../assets/images/samples/qr.png")}
                     alt="qr"
                     size="24"
                     resizeMode="contain"
@@ -249,7 +250,7 @@ export const GenerateQRScreen = ({ navigation }) => {
                       ecl="L"
                     />
                   </Box>
-                </Box>
+                </Flex>
                 <HStack space="8" px="8" py="2" bg="#e7e2ef" borderRadius="md">
                   <VStack w="12" space="2">
                     <IconButton

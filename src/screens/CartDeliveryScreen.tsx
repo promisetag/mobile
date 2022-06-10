@@ -7,23 +7,22 @@ import {
   IconButton,
   Image,
   Select,
-  StatusBar,
   Text,
   VStack,
 } from "native-base";
 import { useState } from "react";
 import { CartTabs, Screen } from "../components";
+import { images } from "../constants";
 
 export const CartDeliveryScreen = () => {
   const [quantity, setQuantity] = useState("1");
 
   return (
-    <Screen style={{}}>
-      <StatusBar barStyle={"dark-content"} />
+    <Screen>
       <Box bg="white" rounded="md" p="4" m="4">
         <HStack space="4">
           <Image
-            source={require("../../src_bk/assets/images/qr/tagpng.png")}
+            source={images.TAG}
             alt="product"
             size="md"
             resizeMode="contain"

@@ -11,4 +11,8 @@ export const routes = Object.freeze({
   PROMISE_TAG: "PromiseTag",
   FILE_LIST: "FileList",
   CART_DELIVERY: "CartDelivery",
+  TAG_DESIGNER: "TagDesigner",
+  SELECT_PRESET: "SelectPreset",
+  UPLOAD_MEDIA: "UploadMedia",
+  QR_GENERATED: "QrGenerated",
 });

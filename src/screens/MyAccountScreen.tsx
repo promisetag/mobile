@@ -11,35 +11,35 @@ import {
   Text,
   VStack,
 } from "native-base";
-import Screen from "../components/Screen";
 import { AccountHeader } from "../components/AccountHeader";
 import { UserAvatar } from "../components/UserAvatar";
+import { Screen } from "../components";
 
 const data = [
   {
     id: 1,
-    image: require("src_bk/assets/images/qr/qr.png"),
+    image: require("../assets/images/samples/qr.png"),
     title: "Aman",
     totalSpace: 120,
     usedSpace: 55,
   },
   {
     id: 2,
-    image: require("src_bk/assets/images/qr/qr.png"),
+    image: require("../assets/images/samples/qr.png"),
     title: "Anna",
     totalSpace: 120,
     usedSpace: 85,
   },
   {
     id: 3,
-    image: require("src_bk/assets/images/qr/qr.png"),
+    image: require("../assets/images/samples/qr.png"),
     title: "Amit",
     totalSpace: 120,
     usedSpace: 45,
   },
   {
     id: 4,
-    image: require("src_bk/assets/images/qr/qr.png"),
+    image: require("../assets/images/samples/qr.png"),
     title: "Sunita",
     totalSpace: 120,
     usedSpace: 40,
@@ -59,7 +59,7 @@ export const MyAccountScreen = ({ navigation }) => {
           </HStack>
           <FlatList
             data={data}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item.id.toString()}
             horizontal={true}
             renderItem={({ item }) => {
               return (
@@ -67,8 +67,7 @@ export const MyAccountScreen = ({ navigation }) => {
                   mr="6"
                   borderRadius="xl"
                   width="40"
-                  height={"48"}
-                  bg="teal.200"
+                  bg="cyan.200"
                   px="2"
                   py="4"
                 >

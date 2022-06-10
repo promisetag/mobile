@@ -1,5 +1,5 @@
 import { Heading, HStack, IconButton } from "native-base";
-import DotsVerticalIcon from "@assets/../../assets/icons/DotsVerticalIcon";
+import DotsVerticalIcon from "../assets/icons/DotsVerticalIcon";
 
 export function AccountHeader() {
   return (

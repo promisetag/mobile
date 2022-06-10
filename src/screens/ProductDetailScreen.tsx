@@ -1,186 +1,132 @@
 import {
-  AddIcon,
   Box,
   Button,
-  Divider,
-  FlatList,
   Heading,
   HStack,
   Image,
-  MinusIcon,
   ScrollView,
   Text,
-  VStack,
 } from "native-base";
-import { Dimensions } from "react-native";
-import ShoppingCartIcon from "src/icons/ShoppingCartIcons";
-import Ratings from "../components/Ratings";
-import routes from "../constants/routes";
+import { useWindowDimensions } from "react-native";
+import { ImageCarousel, Screen, StarRating } from "../components";
+import { routes } from "../constants";
 
-export const ProductDetailScreen = ({ route, navigation }) => {
-  const { width } = Dimensions.get("screen");
-  const productDetail = {
-    thumbnails: [
-      {
-        id: 1,
-        uri: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
-        alt: "product one",
-      },
-      {
-        id: 2,
-        uri: "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
-        alt: "product two",
-      },
-      {
-        id: 3,
-        uri: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-        alt: "product three",
-      },
-    ],
-    id: 1,
-    wishlisted: true,
-    colors: ["black", "red", "yellow"],
-    name: "The DogTag",
-    stock: 12,
-    reviews_count: 30,
-    avg_rating: 4.9,
-    sizes: ["S", "M", "L", "XL"],
-    max_allowed_quantity: 5,
-    description:
-      "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-    price: 1750,
-  };
+const product = {
+  images: [
+    {
+      id: 1,
+      image_url: require("../assets/images/samples/products/product_image_001.jpg"),
+      thumbnail_url: require("../assets/images/samples/products/thumbnails/product_image_001_tn.jpg"),
+    },
+    {
+      id: 2,
+      image_url: require("../assets/images/samples/products/product_image_002.jpg"),
+      thumbnail_url: require("../assets/images/samples/products/thumbnails/product_image_002_tn.jpg"),
+    },
+    {
+      id: 3,
+      image_url: require("../assets/images/samples/products/product_image_003.jpg"),
+      thumbnail_url: require("../assets/images/samples/products/thumbnails/product_image_003_tn.jpg"),
+    },
+  ],
+  variants: [
+    {
+      type: "surface",
+      value: "gold",
+    },
+    {
+      type: "surface",
+      value: "silver",
+    },
+  ],
+  name: "The Promise Lovetag",
+  ratings: {
+    review_count: 36,
+    avg_rating: 4,
+  },
+  original_price: 2349,
+  discounted_price: 1499,
+  quantity: 12,
+  description:
+    "Real toys left for makers then and should in farther had arranged return in seven. Business parents'. Star was, events, of forward a repeat troubled caution like so universal little. Best term every their it that with involved. Lift times, then their he epic I many to and deep follow.",
+  quantity_threshold: 15,
+};
 
-  const renderImages = ({ item }) => {
-    return (
-      <Box
-        position="relative"
-        as="flex"
-        alignItems="center"
-        width={width}
-        color="emerald.400"
-      >
-        <Image
-          source={{ uri: item.uri }}
-          alt="image slider"
-          size="2xl"
-          resizeMode="contain"
-          key={item.id}
-        />
-      </Box>
-    );
-  };
-
-  const { id } = route.params;
+export const ProductDetailScreen = ({ navigation }) => {
+  const windowHeight = useWindowDimensions().height;
+  const windowWidth = useWindowDimensions().width;
   return (
-    <VStack>
-      <Box h="35%" w="full" bg="amber.200">
-        <FlatList
-          data={productDetail.thumbnails}
-          renderItem={renderImages}
-          horizontal={true}
-          keyExtractor={(item) => item.id}
-        />
-      </Box>
-      <ScrollView h="65%" w="full" px="4" py="4">
-        <VStack space="4">
-          <HStack space="8">
-            <Heading size="md">{productDetail.name}</Heading>
-            <Text color="emerald.500">(Only {productDetail.stock} left)</Text>
-          </HStack>
-          <HStack space="8">
-            <Ratings rating={productDetail.avg_rating} />
-            <HStack space="2">
-              <Text>{productDetail.avg_rating}</Text>
-              <Text>({productDetail.reviews_count} reviews)</Text>
-            </HStack>
-          </HStack>
-          <Text fontWeight="bold" color="emerald.500">
-            Size Guide
-          </Text>
-          <HStack space="24">
-            <Text fontWeight="medium">Size</Text>
-            <HStack space="4">
-              <Box
-                borderRadius="full"
-                borderWidth="1"
-                w="8"
-                h="8"
-                as="flex"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <Text>S</Text>
+    <Screen>
+      <Box flex={"1"}>
+        <Box h={windowHeight - 170}>
+          <ScrollView>
+            <Box>
+              <Box h={"80"} pb={"4"}>
+                <ImageCarousel
+                  data={product.images}
+                  width={windowWidth}
+                  renderItem={({ item }) => (
+                    <Box>
+                      <Image
+                        key={item.id}
+                        source={item.image_url}
+                        resizeMode={"cover"}
+                        width={windowWidth}
+                        height={64}
+                        alt={`slide_${item.id}`}
+                      />
+                    </Box>
+                  )}
+                />
               </Box>
-              <Box
-                borderRadius="full"
-                borderWidth="1"
-                w="8"
-                h="8"
-                as="flex"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <Text>M</Text>
+            </Box>
+            <Box mt={"10"} mx={"4"}>
+              <Heading size={"lg"}>{product.name}</Heading>
+              <HStack space={"8"}>
+                <StarRating rating={product.ratings.avg_rating} />
+                <Text color={"muted.500"}>
+                  {product.ratings.review_count} reviews
+                </Text>
+              </HStack>
+              <HStack justifyContent={"space-between"} alignItems={"center"}>
+                <HStack alignItems={"center"} space={"4"} my={"3"}>
+                  <Text fontSize={"2xl"} fontWeight={"bold"}>
+                    Rs. {product.discounted_price}
+                  </Text>
+                  <Text
+                    fontSize={"lg"}
+                    color={"muted.500"}
+                    textDecorationLine={"line-through"}
+                  >
+                    Rs. {product.original_price}
+                  </Text>
+                </HStack>
+                <Text color={"red.500"}>
+                  {product.quantity <= product.quantity_threshold &&
+                    `Only ${product.quantity} left`}
+                </Text>
+              </HStack>
+              <Heading size={"xs"}>Description</Heading>
+              <Box>
+                <ScrollView>
+                  <Text>{product.description}</Text>
+                </ScrollView>
               </Box>
-              <Box
-                borderRadius="full"
-                borderWidth="1"
-                w="8"
-                h="8"
-                as="flex"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <Text>L</Text>
-              </Box>
-              <Box
-                borderRadius="full"
-                borderWidth="1"
-                w="8"
-                h="8"
-                as="flex"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <Text>XL</Text>
-              </Box>
-            </HStack>
-          </HStack>
-          <HStack space="20">
-            <Text fontWeight="medium">Quantity</Text>
-            <HStack space="4">
-              <MinusIcon size="4" />
-              <Text>1</Text>
-              <AddIcon size="4" />
-            </HStack>
-          </HStack>
-          <Divider orientation="horizontal" thickness="2" />
-          <Box>
-            <Heading size="xs">Description</Heading>
-            <Text>{productDetail.description}</Text>
-          </Box>
-          <HStack
-            alignItems="center"
-            justifyContent="space-between"
-            bg="#3bd7cc"
-            p="2"
-            borderRadius="lg"
-            shadow="4"
+            </Box>
+          </ScrollView>
+        </Box>
+        <HStack justifyContent={"space-between"} m={"4"}>
+          <Button
+            colorScheme={"amber"}
+            onPress={() => navigation.navigate(routes.SELECT_PRESET)}
           >
-            <Text ml="4" fontSize="xl" fontWeight="bold" color="white">
-              Rs. 1750
-            </Text>
-            <Button
-              onPress={() => navigation.navigate(routes.GENERATE_QR)}
-              leftIcon={<ShoppingCartIcon w="3" h="3" />}
-              bg="white"
-            >
-              Add to cart
-            </Button>
-          </HStack>
-        </VStack>
-      </ScrollView>
-    </VStack>
+            Select Preset
+          </Button>
+          <Button onPress={() => navigation.navigate(routes.TAG_DESIGNER)}>
+            Design Your Own
+          </Button>
+        </HStack>
+      </Box>
+    </Screen>
   );
 };

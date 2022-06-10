@@ -47,7 +47,7 @@ export const UploadMemories = ({ isOpen, setIsOpen }) => {
               </Box>
               <Box>
                 <Image
-                  source={require("@assets/../../assets/images/memories/Video.png")}
+                  source={require("../assets/images/samples/Video.png")}
                   alt="image"
                   size="sm"
                 />
@@ -69,7 +69,7 @@ export const UploadMemories = ({ isOpen, setIsOpen }) => {
               </Box>
               <Box>
                 <Image
-                  source={require("@assets/../../assets/images/memories/Image.png")}
+                  source={require("../assets/images/samples/Image.png")}
                   alt="image"
                   size="sm"
                 />
@@ -91,7 +91,7 @@ export const UploadMemories = ({ isOpen, setIsOpen }) => {
               </Box>
               <Box>
                 <Image
-                  source={require("@assets/../../assets/images/memories/Audio.png")}
+                  source={require("../assets/images/samples/Audio.png")}
                   alt="image"
                   size="sm"
                 />
@@ -113,7 +113,7 @@ export const UploadMemories = ({ isOpen, setIsOpen }) => {
               </Box>
               <Box>
                 <Image
-                  source={require("@assets/../../assets/images/memories/T.png")}
+                  source={require("../assets/images/samples/T.png")}
                   alt="image"
                   size="sm"
                 />

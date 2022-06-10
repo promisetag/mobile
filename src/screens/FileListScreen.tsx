@@ -4,15 +4,15 @@ import {
   HStack,
   IconButton,
   Image,
+  Pressable,
   SearchIcon,
   SectionList,
   StatusBar,
   Text,
   VStack,
 } from "native-base";
-import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
-import DotsVerticalIcon from "../../src_bk/assets/icons/DotsVerticalIcon";
 import { Screen } from "../components";
+import DotsVerticalIcon from "../assets/icons/DotsVerticalIcon";
 
 const data = [
   {
@@ -118,13 +118,9 @@ const Item = ({ item, section }) => {
     <Box my="2">
       <Pressable>
         <HStack space="4">
-          <Image
-            source={{ uri: item.item.thumbnail }}
-            size="sm"
-            alt="thumbnail"
-          />
+          <Image source={{ uri: item.thumbnail }} size="sm" alt="thumbnail" />
           <VStack>
-            <Text>{item.item.filename}</Text>
+            <Text>{item.filename}</Text>
             <Text>12th March, 2022</Text>
             <Text>32 MB</Text>
           </VStack>
@@ -135,7 +131,7 @@ const Item = ({ item, section }) => {
 };
 
 export const FileListScreen = ({ route }) => {
-  const { fileType } = route.params;
+  const fileType = "video";
   let title = "My Video Memories";
   switch (fileType) {
     case "image":
@@ -169,7 +165,9 @@ export const FileListScreen = ({ route }) => {
               {title}
             </Heading>
           )}
-          renderItem={(item) => <Item item={item} />}
+          renderItem={({ item, section }) => (
+            <Item item={item} section={section} />
+          )}
         />
       </Box>
     </Screen>

@@ -1,5 +1,4 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { TourScreen } from "../screens";
 import { useAppSelector } from "../hooks/redux-toolkit";
 import { TabNavigator } from "./TabNavigator";
 
@@ -10,13 +9,13 @@ export const GuestNavigator = () => {
   if (boarding) {
     return (
       <GuestStack.Navigator>
-        <GuestStack.Screen
-          name="Tour"
-          component={TourScreen}
-          options={{
-            headerShown: false,
-          }}
-        />
+        {/*<GuestStack.Screen*/}
+        {/*  name="Tour"*/}
+        {/*  component={TourScreen}*/}
+        {/*  options={{*/}
+        {/*    headerShown: false,*/}
+        {/*  }}*/}
+        {/*/>*/}
         <GuestStack.Screen
           name="Tab"
           component={TabNavigator}

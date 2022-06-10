@@ -121,7 +121,7 @@ export const CategorySelectedScreen = ({ navigation }) => {
             mt={"12"}
             size={"lg"}
             colorScheme={"teal"}
-            onPress={() => navigation.navigate(routes.PRODUCT_LIST)}
+            onPress={() => navigation.navigate(routes.PRODUCT_DETAIL)}
           >
             Next
           </Button>
