@@ -10,51 +10,29 @@ import {
 import { useWindowDimensions } from "react-native";
 import { ImageCarousel, Screen, StarRating } from "../components";
 import { routes } from "../constants";
-
-const product = {
-  images: [
-    {
-      id: 1,
-      image_url: require("../assets/images/samples/products/product_image_001.jpg"),
-      thumbnail_url: require("../assets/images/samples/products/thumbnails/product_image_001_tn.jpg"),
-    },
-    {
-      id: 2,
-      image_url: require("../assets/images/samples/products/product_image_002.jpg"),
-      thumbnail_url: require("../assets/images/samples/products/thumbnails/product_image_002_tn.jpg"),
-    },
-    {
-      id: 3,
-      image_url: require("../assets/images/samples/products/product_image_003.jpg"),
-      thumbnail_url: require("../assets/images/samples/products/thumbnails/product_image_003_tn.jpg"),
-    },
-  ],
-  variants: [
-    {
-      type: "surface",
-      value: "gold",
-    },
-    {
-      type: "surface",
-      value: "silver",
-    },
-  ],
-  name: "The Promise Lovetag",
-  ratings: {
-    review_count: 36,
-    avg_rating: 4,
-  },
-  original_price: 2349,
-  discounted_price: 1499,
-  quantity: 12,
-  description:
-    "Real toys left for makers then and should in farther had arranged return in seven. Business parents'. Star was, events, of forward a repeat troubled caution like so universal little. Best term every their it that with involved. Lift times, then their he epic I many to and deep follow.",
-  quantity_threshold: 15,
-};
+import { useGetProductByIdQuery } from "../services/promisetag-api";
+import { LoadingScreen } from "./LoadingScreen";
 
 export const ProductDetailScreen = ({ navigation }) => {
   const windowHeight = useWindowDimensions().height;
   const windowWidth = useWindowDimensions().width;
+
+  const {
+    data: product,
+    isLoading,
+    isError,
+    error,
+  } = useGetProductByIdQuery(1);
+
+  console.log(product);
+
+  if (isError) {
+    console.log(error);
+    // @ts-ignore
+    return <Text>Error: {error.error}</Text>;
+  }
+  if (isLoading) return <LoadingScreen />;
+
   return (
     <Screen>
       <Box flex={"1"}>
@@ -69,7 +47,7 @@ export const ProductDetailScreen = ({ navigation }) => {
                     <Box>
                       <Image
                         key={item.id}
-                        source={item.image_url}
+                        src={item.image_url}
                         resizeMode={"cover"}
                         width={windowWidth}
                         height={64}
@@ -83,10 +61,8 @@ export const ProductDetailScreen = ({ navigation }) => {
             <Box mt={"10"} mx={"4"}>
               <Heading size={"lg"}>{product.name}</Heading>
               <HStack space={"8"}>
-                <StarRating rating={product.ratings.avg_rating} />
-                <Text color={"muted.500"}>
-                  {product.ratings.review_count} reviews
-                </Text>
+                <StarRating rating={product.reviews_avg_rating} />
+                <Text color={"muted.500"}>{product.reviews_count} reviews</Text>
               </HStack>
               <HStack justifyContent={"space-between"} alignItems={"center"}>
                 <HStack alignItems={"center"} space={"4"} my={"3"}>

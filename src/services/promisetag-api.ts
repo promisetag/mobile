@@ -19,6 +19,42 @@ export interface Category {
   storage_space_unit?: string;
 }
 
+export interface ProductImage {
+  id: number;
+  image_url: string;
+  thumbnail_url: string;
+}
+
+export interface Product {
+  id: number;
+  name: string;
+  description: string;
+  reviews_count: number;
+  reviews_avg_rating: number;
+  original_price: number;
+  discounted_price: number;
+  quantity: number;
+  quantity_threshold: number;
+  images: ProductImage[];
+}
+
+export interface User {
+  name: string;
+  email: string;
+  phone: string;
+}
+
+export interface AuthResponse {
+  token: string;
+  user: User;
+}
+
+export interface AuthBody {
+  email: string;
+  password: string;
+  device_name: string;
+}
+
 export const promisetagApi = createApi({
   reducerPath: "tourApi",
   baseQuery: fetchBaseQuery({
@@ -35,7 +71,22 @@ export const promisetagApi = createApi({
     getCategories: builder.query<Category[], void>({
       query: () => "/categories",
     }),
+    getProductById: builder.query<Product, number>({
+      query: (id) => `products/${id}`,
+    }),
+    loginByEmailAndPassword: builder.mutation<AuthResponse, AuthBody>({
+      query: (authBody) => ({
+        url: `user/login`,
+        method: "POST",
+        body: authBody,
+      }),
+    }),
   }),
 });
 
-export const { useGetTourPagesQuery, useGetCategoriesQuery } = promisetagApi;
+export const {
+  useGetTourPagesQuery,
+  useGetCategoriesQuery,
+  useGetProductByIdQuery,
+  useLoginByEmailAndPasswordMutation,
+} = promisetagApi;

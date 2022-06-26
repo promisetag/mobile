@@ -10,8 +10,14 @@ import {
   VStack,
 } from "native-base";
 import { Screen } from "../components";
+import { useAppSelector } from "../hooks/redux-toolkit";
+import { routes } from "../constants";
 
 export const QrGeneratedScreen = ({ navigation }) => {
+  const authenticated = useAppSelector((state) => state.auth.authenticated);
+  if (authenticated) {
+    navigation.navigate(routes.LOGIN);
+  }
   return (
     <>
       <Screen>

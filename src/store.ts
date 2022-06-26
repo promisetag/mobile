@@ -1,11 +1,6 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import drawerReducer from "./features/drawerSlice";
-import authReducer from "./features/authSlice";
-import boardingReducer from "./features/boardingSlice";
-import categoryReducer from "./features/categorySlice";
-import { promisetagApi } from "./services/promisetag-api";
-import { setupListeners } from "@reduxjs/toolkit/query";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { setupListeners } from "@reduxjs/toolkit/query";
 import {
   FLUSH,
   PAUSE,
@@ -13,8 +8,14 @@ import {
   persistReducer,
   PURGE,
   REGISTER,
-  REHYDRATE,
+  REHYDRATE
 } from "redux-persist";
+import authReducer from "./features/authSlice";
+import boardingReducer from "./features/boardingSlice";
+import categoryReducer from "./features/categorySlice";
+import drawerReducer from "./features/drawerSlice";
+import navigationReducer from "./features/navigationSlice";
+import { promisetagApi } from "./services/promisetag-api";
 
 const reducers = combineReducers({
   [promisetagApi.reducerPath]: promisetagApi.reducer,
@@ -22,6 +23,7 @@ const reducers = combineReducers({
   auth: authReducer,
   boarding: boardingReducer,
   category: categoryReducer,
+  navigation: navigationReducer,
 });
 
 const persistConfig = {

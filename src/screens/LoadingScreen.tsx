@@ -1,13 +1,13 @@
-import { Box, Spinner, StatusBar } from "native-base";
 import { Screen } from "../components";
+import { ActivityIndicator, StatusBar, View } from "react-native";
 
 export const LoadingScreen = () => {
   return (
     <Screen>
       <StatusBar barStyle={"dark-content"} />
-      <Box flex={1} justifyContent={"center"}>
-        <Spinner size={"lg"} />
-      </Box>
+      <View style={{ flex: 1, justifyContent: "center" }}>
+        <ActivityIndicator size={"large"} />
+      </View>
     </Screen>
   );
 };

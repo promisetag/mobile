@@ -58,7 +58,7 @@ export const ImageCarousel = ({ data, renderItem, width }) => {
                 }
               >
                 <Image
-                  source={item.thumbnail_url}
+                  src={item.thumbnail_url}
                   size={"sm"}
                   alt={`slide_tn_${item.id}`}
                 />

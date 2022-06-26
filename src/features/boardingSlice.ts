@@ -13,7 +13,7 @@ export const boardingSlice = createSlice({
   initialState,
   reducers: {
     userBoarded: (state) => {
-      state.value = true;
+      state.value = false;
     },
     toggle: (state) => {
       state.value = !state.value;

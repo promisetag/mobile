@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "bornopedia-expo",
-    "slug": "bornopedia-expo",
+    "name": "Promise Tag",
+    "slug": "promise-tag",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
@@ -24,7 +24,7 @@
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.guttume.bornopediaexpo"
+      "package": "com.promistag.app"
     },
     "web": {
       "favicon": "./src/assets/favicon.png"

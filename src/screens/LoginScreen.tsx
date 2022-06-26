@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { useMst } from "../../models/root";
-import Screen from "../components/Screen";
 import {
   Button,
   HStack,
@@ -8,29 +6,59 @@ import {
   Image,
   Input,
   Pressable,
-  Spinner,
   StatusBar,
   Text,
+  useToast,
   VStack,
 } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
+import { Screen } from "../components";
+import {
+  AuthResponse,
+  useLoginByEmailAndPasswordMutation,
+} from "../services/promisetag-api";
+import { LoadingScreen } from "./LoadingScreen";
+import * as Device from "expo-device";
+import { useAppDispatch } from "../hooks/redux-toolkit";
+import { login } from "../features/authSlice";
 
 export const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { auth } = useMst();
+  const [loginByEmailAndPassword, { isLoading }] =
+    useLoginByEmailAndPasswordMutation();
+  const dispatch = useAppDispatch();
+  const toast = useToast();
 
-  const login = () => {
-    auth.login(email, password);
+  const handleLoginButtonClicked = async () => {
+    try {
+      const authResponse: AuthResponse = await loginByEmailAndPassword({
+        email,
+        password,
+        device_name: Device.deviceName,
+      }).unwrap();
+      dispatch(
+        login({
+          authenticated: true,
+          token: authResponse.token,
+          user: authResponse.user,
+        })
+      );
+    } catch (error) {
+      toast.show({ description: error.data.message, status: "danger" });
+    }
   };
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <Screen>
       <StatusBar barStyle={"dark-content"} />
-      {auth.state === "pending" && <Spinner size="lg" />}
       <VStack px={"4"} space={"4"} bg={"white"} borderBottomRadius={"20"}>
         <Image
-          source={require("../../src_bk/assets/images/login-bg-new.png")}
+          source={require("../assets/images/samples/login-bg-new.png")}
           w={"95%"}
           h={"50%"}
           mx={"auto"}
@@ -48,19 +76,19 @@ export const LoginScreen = ({ navigation }) => {
           onChangeText={(text) => setPassword(text)}
         />
         <Text textAlign={"right"}>Forgot Password?</Text>
-        <Button size={"lg"} onPress={login}>
+        <Button size={"lg"} onPress={handleLoginButtonClicked}>
           Login
         </Button>
         <VStack alignItems={"center"} space={"2"}>
           <Text>Or login with</Text>
           <HStack space={"2"}>
             <Image
-              source={require("../../src_bk/assets/images/834722_facebook_icon.png")}
+              source={require("../assets/images/samples/834722_facebook_icon.png")}
               size={"xs"}
               alt={"fb icon"}
             />
             <Image
-              source={require("../../src_bk/assets/images/google-logo-9808.png")}
+              source={require("../assets/images/samples/google-logo-9808.png")}
               size={"xs"}
               alt={"google icon"}
             />

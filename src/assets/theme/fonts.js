@@ -1,6 +1,7 @@
 const fonts = {
   heading: "Roboto",
   body: "Roboto",
+  mono: "Roboto",
 };
 
 const fontConfig = {

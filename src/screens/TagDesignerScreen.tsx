@@ -7,7 +7,7 @@ import {
   Inter_600SemiBold,
   Inter_700Bold,
   Inter_800ExtraBold,
-  Inter_900Black,
+  Inter_900Black
 } from "@expo-google-fonts/inter";
 import {
   Montserrat_100Thin,
@@ -27,7 +27,7 @@ import {
   Montserrat_800ExtraBold,
   Montserrat_800ExtraBold_Italic,
   Montserrat_900Black,
-  Montserrat_900Black_Italic,
+  Montserrat_900Black_Italic
 } from "@expo-google-fonts/montserrat";
 import {
   Roboto_100Thin,
@@ -41,7 +41,7 @@ import {
   Roboto_700Bold,
   Roboto_700Bold_Italic,
   Roboto_900Black,
-  Roboto_900Black_Italic,
+  Roboto_900Black_Italic
 } from "@expo-google-fonts/roboto";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import AppLoading from "expo-app-loading";
@@ -55,21 +55,24 @@ import {
   Pressable,
   ScrollView,
   Text,
-  VStack,
+  VStack
 } from "native-base";
 import { useState } from "react";
 import { Screen } from "../components";
 import { ChooseFont } from "../components/ChooseFont";
-import { UpdateName } from "../components/UpdateName";
 import { ChooseIcon } from "../components/ChooseIcon";
+import { UpdateName } from "../components/UpdateName";
+import { routes } from "../constants";
+import { setNextRoute } from "../features/navigationSlice";
+import { useAppDispatch, useAppSelector } from "../hooks/redux-toolkit";
 
 export const TagDesignerScreen = ({ navigation }) => {
+  const authenticated = useAppSelector((state) => state.auth.authenticated);
+  const dispatch = useAppDispatch();
   const [customerName, setCustomerName] = useState("Your Name");
   const [tagIcon, setTagIcon] = useState("deer");
   const [showChooseIconDialog, setShowChooseIconDialog] = useState(false);
   const [showUpdateNameDialog, setShowUpdateNameDialog] = useState(false);
-  const [showUploadMemoriesDialog, setShowUploadMemoriesDialog] =
-    useState(false);
   const [nameFont, setNameFont] = useState("Roboto_400Regular");
   const [nameFontSize, setNameFontSize] = useState("sm");
   const [nameAlignmentVertical, setNameAlignmentVertical] =
@@ -135,6 +138,15 @@ export const TagDesignerScreen = ({ navigation }) => {
       source: require("../assets/images/samples/alien.png"),
     },
   ];
+
+  const moveToNextScreen = () => {
+    if (authenticated) {
+      navigation.navigate(routes.QR_GENERATED);
+    } else {
+      dispatch(setNextRoute(routes.QR_GENERATED));
+      navigation.navigate(routes.LOGIN);
+    }
+  };
 
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -331,7 +343,7 @@ export const TagDesignerScreen = ({ navigation }) => {
                       Upload your memories to generate your unique and personal
                       QR
                     </Text>
-                    <Pressable my={4} pb={4}>
+                    <Pressable my={4} pb={4} onPress={moveToNextScreen}>
                       <Box
                         bg={"yellow.500"}
                         justifyContent={"center"}
