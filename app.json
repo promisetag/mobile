@@ -24,7 +24,7 @@
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.promistag.app"
+      "package": "com.promisetag.app"
     },
     "web": {
       "favicon": "./src/assets/favicon.png"
